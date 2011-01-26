@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="java/server/src"/>
+	<classpathentry kind="src" path="java/registry/src"/>
+	<classpathentry kind="src" path="java/plugins/src"/>
+	<classpathentry kind="src" path="java/web/console/src"/>
+	<classpathentry kind="src" path="java/web/config-tool/src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.5.0_10"/>
+	<classpathentry kind="lib" path="java/lib/commons-cli-1.0.jar"/>
+	<classpathentry kind="lib" path="java/lib/log4j-1.2.13.jar"/>
+	<classpathentry kind="lib" path="java/plugins/lib/commons-httpclient-3.0.1.jar"/>
+	<classpathentry kind="lib" path="java/plugins/lib/commons-net-1.4.1.jar"/>
+	<classpathentry kind="lib" path="java/plugins/lib/jdom.jar"/>
+	<classpathentry kind="lib" path="java/plugins/lib/jxydiff.jar"/>
+	<classpathentry kind="lib" path="java/plugins/lib/sforce80.jar"/>
+	<classpathentry kind="lib" path="java/plugins/lib/mail.jar"/>
+	<classpathentry kind="lib" path="java/plugins/lib/jaxrpc.jar"/>
+	<classpathentry kind="lib" path="java/plugins/lib/axis.jar"/>
+	<classpathentry kind="lib" path="java/web/lib/jsp-api-2.1.jar"/>
+	<classpathentry kind="lib" path="java/lib/start-6.1.2rc1.jar"/>
+	<classpathentry kind="lib" path="java/web/lib/servlet-api-2.5-6.1.2rc1.jar"/>
+	<classpathentry kind="lib" path="java/web/lib/jsf-api-1.2_04-b10.jar"/>
+	<classpathentry kind="lib" path="java/web/lib/jsf-impl-1.2_04-b10.jar"/>
+	<classpathentry kind="lib" path="java/web/lib/jsp-2.1.jar"/>
+	<classpathentry kind="lib" path="java/plugins/lib/jbossall-client.jar"/>
+	<classpathentry kind="output" path="build/eclipse"/>
+</classpath>
