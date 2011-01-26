@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<web-app>
+
+	<display-name>blue console</display-name>
+   <description>Blue Star, a Java Port of . Include blue server, blue console, blue plugins and blue agents.</description>
+
+
+<!-- SPECIFY THE LOCATION OF CGI CONFIGURATION FILE -->
+    <context-param>
+      <param-name>NAGIOS_CGI_CONFIG</param-name>
+      <param-value>etc/cgi.cfg</param-value>
+      <description>Location of the nagios cgi configuration file.</description>
+    </context-param>
+
+<!--  SPECIFY LOCATION OF COMMAND FILE in a CGI these would have been passed in via the command line. -->
+    <context-param>
+      <param-name>NAGIOS_COMMAND_FILE</param-name>
+      <param-value>var/nagios.cmd</param-value>
+      <description>Location of the nagios command file.</description>
+    </context-param>
+
+    <servlet><servlet-name>avail</servlet-name><servlet-class>org.blue.star.cgi.avail</servlet-class></servlet>
+    <servlet><servlet-name>cmd</servlet-name><servlet-class>org.blue.star.cgi.cmd</servlet-class></servlet>
+    <servlet><servlet-name>config</servlet-name><servlet-class>org.blue.star.cgi.config</servlet-class></servlet>
+    <servlet><servlet-name>extinfo</servlet-name><servlet-class>org.blue.star.cgi.extinfo</servlet-class></servlet>
+    <servlet><servlet-name>histogram</servlet-name><servlet-class>org.blue.star.cgi.histogram</servlet-class></servlet>
+    <servlet><servlet-name>history</servlet-name><servlet-class>org.blue.star.cgi.history</servlet-class></servlet>
+    <servlet><servlet-name>notifications</servlet-name><servlet-class>org.blue.star.cgi.notifications</servlet-class></servlet>
+    <servlet><servlet-name>outages</servlet-name><servlet-class>org.blue.star.cgi.outages</servlet-class></servlet>
+    <servlet><servlet-name>showlog</servlet-name><servlet-class>org.blue.star.cgi.showlog</servlet-class></servlet>
+    <servlet><servlet-name>status</servlet-name><servlet-class>org.blue.star.cgi.status</servlet-class></servlet>
+    <servlet><servlet-name>statusmap</servlet-name><servlet-class>org.blue.star.cgi.statusmap</servlet-class></servlet>
+    <servlet><servlet-name>statuswml</servlet-name><servlet-class>org.blue.star.cgi.statuswml</servlet-class></servlet>
+    <servlet><servlet-name>statuswrl</servlet-name><servlet-class>org.blue.star.cgi.statuswrl</servlet-class></servlet>
+    <servlet><servlet-name>summary</servlet-name><servlet-class>org.blue.star.cgi.summary</servlet-class></servlet>
+    <servlet><servlet-name>tac</servlet-name><servlet-class>org.blue.star.cgi.tac</servlet-class></servlet>
+    <servlet><servlet-name>trends</servlet-name><servlet-class>org.blue.star.cgi.trends</servlet-class></servlet>
+    
+    <servlet-mapping><servlet-name>avail</servlet-name><url-pattern>/avail</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>avail</servlet-name><url-pattern>/avail.cgi</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>cmd</servlet-name><url-pattern>/cmd</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>cmd</servlet-name><url-pattern>/cmd.cgi</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>config</servlet-name><url-pattern>/config</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>config</servlet-name><url-pattern>/config.cgi</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>extinfo</servlet-name><url-pattern>/extinfo</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>extinfo</servlet-name><url-pattern>/extinfo.cgi</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>histogram</servlet-name><url-pattern>/histogram</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>histogram</servlet-name><url-pattern>/histogram.cgi</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>history</servlet-name><url-pattern>/history</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>history</servlet-name><url-pattern>/history.cgi</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>notifications</servlet-name><url-pattern>/notifications</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>notifications</servlet-name><url-pattern>/notifications.cgi</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>outages</servlet-name><url-pattern>/outages</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>outages</servlet-name><url-pattern>/outages.cgi</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>showlog</servlet-name><url-pattern>/showlog</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>showlog</servlet-name><url-pattern>/showlog.cgi</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>status</servlet-name><url-pattern>/status</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>status</servlet-name><url-pattern>/status.cgi</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>statusmap</servlet-name><url-pattern>/statusmap</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>statusmap</servlet-name><url-pattern>/statusmap.cgi</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>statuswml</servlet-name><url-pattern>/statuswml</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>statuswml</servlet-name><url-pattern>/statuswml.cgi</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>statuswrl</servlet-name><url-pattern>/statuswrl</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>statuswrl</servlet-name><url-pattern>/statuswrl.cgi</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>summary</servlet-name><url-pattern>/summary</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>summary</servlet-name><url-pattern>/summary.cgi</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>tac</servlet-name><url-pattern>/tac</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>tac</servlet-name><url-pattern>/tac.cgi</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>trends</servlet-name><url-pattern>/trends</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>trends</servlet-name><url-pattern>/trends.cgi</url-pattern></servlet-mapping>
+
+</web-app>

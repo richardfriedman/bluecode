@@ -1,0 +1,26 @@
+<html>
+<head>
+<title>Blue Configuration Tool - Service Dependency Help</title>
+<link href="styles/blue_help.css" rel="stylesheet" type="text/css"/>
+</head>
+<body bgcolor="#F0F8FF">
+	<h3>Service Dependency Help</h3>
+	<p>This page allows you to define Service Dependency objects within your Blue monitoring configuration. Service Dependencies
+	are a way of suppressing notifcations and active checks of Services based on the status of another Service. When defining a Service
+	Dependency there are a number of different pieces of information that you need to provide:
+	
+		<ul>
+			<li><b>Dependent Host Name</b> - This is the name of the Host on which the dependent Service runs.</li>
+			<li><b>Dependent Service Description</b> - This is the description of Service on whose status we shall depend.</li>
+			<li><b>Host Name</b> - The name of the Host on which the Service runs.</li>
+			<li><b>Service Description</b> - The description of the Service that we would like to make dependent.</li>
+		</ul>
+	
+	<p>You can also specify whether or not this Dependency inherits the dependencies of the Service it is dependent on. Using this option, should
+	any Services that the parent of this dependency is dependent on fail, then notifications and checks for this Service will also be supressed.</p>
+	<p>By providing the Execution and Notification failure criteria, you prescribe the conditions of the dependent Service that will cause checks and
+	notifications of the Service to be supressed.</p>   
+	
+	<p>It should be noted that Service Dependencies are an optional part of your monitoring setup.</p>
+</body>
+</html> 

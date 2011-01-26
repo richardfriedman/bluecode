@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns="http://localhost:8080/blue-config/ns/mainblueconfig"
+	    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	    targetNamespace="http://localhost:8080/blue-config/ns/mainblueconfig">
+	
+	<xsd:include schemaLocation="http://localhost:8080/blue-config/ns/generic.xsd"/>
+	    
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+			XML Schema for the Main Blue Configuration file.
+		</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:element name="blue_config" type="blue-config"/>
+	
+	<xsd:complexType name="blue-config">
+		<xsd:sequence>
+			<xsd:element name="log_file" type="xsd:token"/>
+			<xsd:element name="cfg_file" type="xsd:token" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="cfg_dir" type="xsd:token" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="object_cache_file" type="xsd:token"/>
+			<xsd:element name="resource_file" type="xsd:token"/>
+			<xsd:element name="temp_file" type="xsd:token"/>
+			<xsd:element name="status_file" type="xsd:token"/>
+			<xsd:element name="aggregate_status_updates" type="trueOrFalse"/>
+			<xsd:element name="status_update_interval">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:positiveInteger">
+						<xsd:minInclusive value="5"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="nagios_user" type="xsd:token"/>
+			<xsd:element name="nagios_group" type="xsd:token"/>
+			<xsd:element name="enable_notifications" type="trueOrFalse"/>
+			<xsd:element name="execute_service_checks" type="trueOrFalse"/>
+			<xsd:element name="accept_passive_service_checks" type="trueOrFalse"/>
+			<xsd:element name="execute_host_checks" type="trueOrFalse"/>
+			<xsd:element name="accept_passive_host_checks" type="trueOrFalse"/>
+			<xsd:element name="enable_event_handlers" type="trueOrFalse"/>
+			<xsd:element name="log_rotation_method">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="log_rotation_option" type="log-rotation-options"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="log_archive_path" type="xsd:token"/>
+			<xsd:element name="check_external_commands" type="trueOrFalse"/>
+			<xsd:element name="command_check_interval">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:token">
+						<xsd:pattern value="-?[0-9]+s?"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="command_file" type="xsd:token"/>
+			<xsd:element name="downtime_file" type="xsd:token"/>
+			<xsd:element name="comment_file" type="xsd:token"/>
+			<xsd:element name="lock_file" type="xsd:token"/>
+			<xsd:element name="retain_state_information" type="trueOrFalse"/>
+			<xsd:element name="state_retention_file" type="xsd:token"/>
+			<xsd:element name="retention_update_interval" type="xsd:nonNegativeInteger"/>
+			<xsd:element name="use_retained_program_state" type="trueOrFalse"/>
+			<xsd:element name="use_retained_scheduling_info" type="trueOrFalse"/>
+			<xsd:element name="use_syslog" type="trueOrFalse"/>
+			<xsd:element name="log_notifications" type="trueOrFalse"/>
+			<xsd:element name="log_service_retries" type="trueOrFalse"/>
+			<xsd:element name="log_host_retries" type="trueOrFalse"/>
+			<xsd:element name="log_event_handlers" type="trueOrFalse"/>
+			<xsd:element name="log_initial_states" type="trueOrFalse"/>
+			<xsd:element name="log_external_commands" type="trueOrFalse"/>
+			<xsd:element name="log_passive_checks" type="trueOrFalse"/>
+			<xsd:element name="global_host_event_handler" type="xsd:token"/>
+			<xsd:element name="global_service_event_handler" type="xsd:token"/>
+			<xsd:element name="sleep_time" type="xsd:positiveInteger"/>
+			<xsd:element name="service_inter_check_delay_method" type="delay-methods"/>
+			<xsd:element name="max_service_check_spread" type="xsd:positiveInteger"/>
+			<xsd:element name="service_interleave_factor">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:token">
+						<xsd:pattern value="s"/>
+						<xsd:pattern value="[1-9][0-9]+"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="max_concurrent_checks" type="xsd:positiveInteger"/>
+			<xsd:element name="service_reaper_frequency" type="xsd:positiveInteger"/>
+			<xsd:element name="host_inter_check_delay_method" type="delay-methods"/>
+			<xsd:element name="max_host_check_spread" type="xsd:positiveInteger"/>
+			<xsd:element name="interval_length" type="xsd:positiveInteger"/>
+			<xsd:element name="auto_reschedule_checks" type="trueOrFalse"/>
+			<xsd:element name="auto_rescheduling_interval" type="xsd:positiveInteger"/>
+			<xsd:element name="auto_rescheduling_window" type="xsd:positiveInteger"/>
+			<xsd:element name="use_aggressive_host_checking" type="trueOrFalse"/>
+			<xsd:element name="enable_flap_detection" type="trueOrFalse"/>
+			<xsd:element name="low_service_flap_threshold" type="positiveDouble"/>
+			<xsd:element name="high_service_flap_threshold" type="positiveDouble"/>
+			<xsd:element name="low_host_flap_threshold" type="positiveDouble"/>
+			<xsd:element name="high_host_flap_threshold" type="positiveDouble"/>
+			<xsd:element name="soft_state_dependencies" type="trueOrFalse"/>
+			<xsd:element name="service_check_timeout" type="xsd:positiveInteger"/>
+			<xsd:element name="host_check_timeout" type="xsd:positiveInteger"/>
+			<xsd:element name="event_handler_timeout" type="xsd:positiveInteger"/>
+			<xsd:element name="notification_timeout" type="xsd:positiveInteger"/>
+			<xsd:element name="ocsp_timeout" type="xsd:positiveInteger"/>
+			<xsd:element name="ochp_timeout" type="xsd:positiveInteger"/>
+			<xsd:element name="perfdata_timeout" type="xsd:positiveInteger"/>
+			<xsd:element name="obsess_over_services" type="trueOrFalse"/>
+			<xsd:element name="ocsp_command" type="xsd:token"/>
+			<xsd:element name="obsess_over_hosts" type="trueOrFalse"/>
+			<xsd:element name="ochp_command" type="xsd:token"/>
+			<xsd:element name="process_performance_data" type="trueOrFalse"/>
+			<xsd:element name="host_perfdata_command" type="xsd:token"/>
+			<xsd:element name="service_perfdata_command" type="xsd:token"/>
+			<xsd:element name="host_perfdata_file" type="xsd:token"/>
+			<xsd:element name="service_perfdata_file" type="xsd:token"/>
+			<xsd:element name="host_perfdata_file_template" type="xsd:token"/>
+			<xsd:element name="service_perfdata_file_template" type="xsd:token"/>
+			<xsd:element name="host_perfdata_file_mode" type="file-modes"/>
+			<xsd:element name="service_perfdata_file_mode" type="file-modes"/>
+			<xsd:element name="host_perfdata_file_processing_interval" type="xsd:positiveInteger"/>
+			<xsd:element name="service_perfdata_file_processing_interval" type="xsd:positiveInteger"/>
+			<xsd:element name="host_perfdata_file_processing_command" type="xsd:token"/>
+			<xsd:element name="service_perfdata_file_processing_command" type="xsd:token"/>
+			<xsd:element name="check_for_orphaned_services" type="trueOrFalse"/>
+			<xsd:element name="check_service_freshness" type="trueOrFalse"/>
+			<xsd:element name="service_freshness_check_interval" type="xsd:positiveInteger"/>
+			<xsd:element name="check_host_freshness" type="trueOrFalse"/>
+			<xsd:element name="host_freshness_check_interval" type="trueOrFalse"/>
+			<xsd:element name="date_format">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:token">
+						<xsd:pattern value="us"/>
+						<xsd:pattern value="euro"/>
+						<xsd:pattern value="iso8601"/>
+						<xsd:pattern value="strict-iso8601"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="illegal_object_name_chars" type="xsd:token"/>
+			<xsd:element name="illegal_macro_ouput_chars" type="xsd:token"/>
+			<xsd:element name="use_regexp_matching" type="trueOrFalse"/>
+			<xsd:element name="use_true_regexp_matching" type="trueOrFalse"/>
+			<xsd:element name="admin_email" type="xsd:token"/>
+			<xsd:element name="admin_pager" type="xsd:token"/>
+		</xsd:sequence>
+	</xsd:complexType>			
+			
+	
+	<xsd:simpleType name="log-rotation-options">
+		<xsd:restriction base="xsd:token">
+			<xsd:pattern value="n"/>
+			<xsd:pattern value="h"/>
+			<xsd:pattern value="d"/>
+			<xsd:pattern value="w"/>
+			<xsd:pattern value="m"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+			
+	<xsd:simpleType name="delay-methods">
+		<xsd:restriction based="xsd:token">
+			<xsd:pattern value="n"/>
+			<xsd:pattern value="d"/>
+			<xsd:pattern value="s"/>
+			<xsd:pattern value="[0-9]+\.[0-9]+"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	  
+	<xsd:simpleType name="positiveDouble">
+		<xsd:restriction base="xsd:double">
+			<xsd:minInclusive value="0"/>
+		</xsd:restriction>
+	</xsd:simpleType>  
+	
+	<xsd:simpleType name="file-modes">
+		<xsd:restriction base="xsd:token">
+			<xsd:pattern value="a"/>
+			<xsd:pattern value="w"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

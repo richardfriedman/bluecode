@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contacts:contacts xmlns:contacts="http://localhost:8080/blue-config/ns/contacts">
+  <contacts:contact id="0">
+    <contacts:contact_name>Blue Admin</contacts:contact_name>
+    <contacts:alias>Example Blue Contact</contacts:alias>
+    <contacts:service_notification_period>24 x 7</contacts:service_notification_period>
+    <contacts:host_notification_period>24 x 7</contacts:host_notification_period>
+    <contacts:service_notification_options>w,u,c</contacts:service_notification_options>
+    <contacts:host_notification_options>d,u,r</contacts:host_notification_options>
+    <contacts:service_notification_commands>email_contact</contacts:service_notification_commands>
+    <contacts:host_notification_commands>email_contact</contacts:host_notification_commands>
+    <contacts:email>your_admin@yourdomain.com</contacts:email>
+    <contacts:pager>admin_pager@yourdomain.com</contacts:pager>
+  </contacts:contact>
+</contacts:contacts>
+

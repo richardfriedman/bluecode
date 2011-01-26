@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns="http://localhost:8080/blue-config/ns/timeperiods"
+	    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	    targetNamespace="http://localhost:8080/blue-config/ns/timeperiods">
+	
+	<xsd:include schemaLocation="http://localhost:8080/blue-config/ns/generic.xsd"/>
+	    
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+			XML Schema for TimePeriod Definition within Blue Monitoring Framework.
+		</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:element name="time_periods">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="time_period" type="time_period" minOccurs="1" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:complexType name="time_period">
+		<xsd:sequence>
+			<xsd:element name="timeperiod_name" type="xsd:token"/>
+			<xsd:element name="alias" type="xsd:token"/>
+			<xsd:element name="timeperiod_definition">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="timeperiod_instance" type="timeperiod_definition" minOccurs="1" maxOccurs="7"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:ID"/>
+	</xsd:complexType>			
+			
+	
+	<xsd:simpleType name="days">
+		<xsd:restriction base="xsd:token">
+			<xsd:pattern value="monday"/>
+			<xsd:pattern value="tuesday"/>
+			<xsd:pattern value="wednesday"/>
+			<xsd:pattern value="thursday"/>
+			<xsd:pattern value="friday"/>
+			<xsd:pattern value="saturday"/>
+			<xsd:pattern value="sunday"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="validTimePeriod">
+		<xsd:restriction base="xsd:token">
+			<xsd:pattern value="[0-2]{1}[0-4]{1}:[0-5]{1}[0-9]{1}(,[0-2]{1}[0-4]{1}:[0-5]{1}[0-9]{1})*"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:complexType name="timeperiod_definition">
+		<xsd:sequence>
+			<xsd:element name="day" type="days" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="time" type="validTimePeriod" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>
+	

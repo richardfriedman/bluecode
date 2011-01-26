@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>Running Blue</title>
+<link href="styles/blue.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div id="content">
+<a href="index.html">Home</a><br/>
+<h3>Running Blue</h3>
+
+<p>
+There are several options available to you when running Blue. One option is to use the start-up scripts provided with this download.
+Contained within the ~bin/ directory of your download, start-blue.sh (unix) or start-blue.bat(windows) will get Blue and the Blue Console running for you. 
+</p>
+<p>
+The startup script supports a few command line arguments to alter the way in which it runs.
+Without any arguments the startup script will start the Blue Console and the Blue Configuration Tool only.
+This allows you to manage the different components as seperate entities, or run Blue in a headless manner should you want to.</p>
+
+<p>Using the -s option will cause the startup script to launch the Blue server as well.
+Using -s in conjunction with -n will cause Blue to install an extremely basic configuration for you. This will get you up and running and monitoring your first host in no time. 
+Using the -n option assumes that you have your plug-ins installed in $BLUE_HOME/libexec. If this is not the case then you must use the -p option to override this setting. For example should my plug-ins reside in /usr/local/blue-plugins,
+I would start the server in the following way:<br/><br/>
+<b>BLUE_HOME/start-blue.sh -s -i -p /usr/local/blue-plugins</b> for Unix users<br/>
+<b>BLUE_HOME/start-blue.bat -s -i -p C:/cygwin/usr/local/blue-plugins</b> for Windows users.
+<br/><br/>
+
+The final option you can use with the startup script is -c. You can use this should you wish to use an already existing configuration (Perhaps you already have Nagios and are looking to try Blue). The -c option can be used in conjunction with the -s option to launch
+the Blue server with an alternative configuration file i.e.<br/><br/>
+
+<b>BLUE_HOME/start-blue.sh -s -c /usr/local/nagios/etc/nagios.cfg</b> for Unix users<br/>
+<b>BLUE_HOME/start-blue.bat -s -c c:/blue/etc/nagios.cfg for Windows users.</b>
+</p>
+
+<p>
+There are several ways you can launch Blue outside of the startup script and these are available to suite your own needs.
+Firstly you can call the .jar files directly from the command line. Using the following commands you can get the Blue Components up and running.
+<br/>
+<b>java -jar blue-server.jar <options> <path_to_config></b>
+<br/><br/>
+
+You can also use the -v switch with the above command to verify the contents of any configuration file you are intending to use. You can also use the -s switch to display current Blue scheduling information and recommendations. Using the 
+-h switch with the above option will give you the ability to find out all available options to you.
+</p>
+
+<p>To start the Blue Console outside of the wrapper scripts, you will need to enter the following command<br/>
+
+<br/><b>java -jar blue-console.jar</b><br/><br/>
+
+This will start the Blue console at http://localhost:8080/blue and the Blue Configuration Tool at http://localhost:8080/blue-config should you have it installed.
+</p>
+
+<p>It should be noted that to launch Blue outside of the wrapper scripts in this manner, you will need to have the Java executable on your path.</p>
+<a href="index.html">Home</a>
+</div>
+</body>
+</html>
+

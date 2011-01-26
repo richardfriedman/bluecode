@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services:services xmlns:services="http://localhost:8080/blue-config/ns/services">
+  <services:service id="0">
+    <services:host_name>Localhost</services:host_name>
+    <services:service_description>PING</services:service_description>
+    <services:is_volatile>0</services:is_volatile>
+    <services:check_command>check_ping!100.0,20%!500.0,60%</services:check_command>
+    <services:max_check_attempts>4</services:max_check_attempts>
+    <services:normal_check_interval>5</services:normal_check_interval>
+    <services:retry_check_interval>1</services:retry_check_interval>
+    <services:active_checks_enabled>1</services:active_checks_enabled>
+    <services:passive_checks_enabled>1</services:passive_checks_enabled>
+    <services:check_period>24 x 7</services:check_period>
+    <services:parallelize_check>1</services:parallelize_check>
+    <services:obsess_over_service>1</services:obsess_over_service>
+    <services:check_freshness>0</services:check_freshness>
+    <services:freshness_threshold>0</services:freshness_threshold>
+    <services:event_handler>global_event_handler</services:event_handler>
+    <services:event_handler_enabled>1</services:event_handler_enabled>
+    <services:low_flap_threshold>0</services:low_flap_threshold>
+    <services:high_flap_threshold>0</services:high_flap_threshold>
+    <services:flap_detection_enabled>0</services:flap_detection_enabled>
+    <services:process_perf_data>1</services:process_perf_data>
+    <services:retain_status_information>1</services:retain_status_information>
+    <services:retain_nonstatus_information>1</services:retain_nonstatus_information>
+    <services:notification_interval>30</services:notification_interval>
+    <services:notification_period>24 x 7</services:notification_period>
+    <services:notification_options>w,u,c,r</services:notification_options>
+    <services:notifications_enabled>1</services:notifications_enabled>
+    <services:contact_groups>Blue_Contacts</services:contact_groups>
+  </services:service>
+  <services:service id="1">
+    <services:host_name>Localhost</services:host_name>
+    <services:service_description>Check Root Disk</services:service_description>
+    <services:is_volatile>0</services:is_volatile>
+    <services:check_command>check_local_disk!20%!10%!/</services:check_command>
+    <services:max_check_attempts>4</services:max_check_attempts>
+    <services:normal_check_interval>5</services:normal_check_interval>
+    <services:retry_check_interval>1</services:retry_check_interval>
+    <services:active_checks_enabled>1</services:active_checks_enabled>
+    <services:passive_checks_enabled>1</services:passive_checks_enabled>
+    <services:check_period>24 x 7</services:check_period>
+    <services:parallelize_check>1</services:parallelize_check>
+    <services:obsess_over_service>1</services:obsess_over_service>
+    <services:check_freshness>0</services:check_freshness>
+    <services:freshness_threshold>0</services:freshness_threshold>
+    <services:event_handler>global_event_handler</services:event_handler>
+    <services:event_handler_enabled>1</services:event_handler_enabled>
+    <services:low_flap_threshold>0</services:low_flap_threshold>
+    <services:high_flap_threshold>0</services:high_flap_threshold>
+    <services:flap_detection_enabled>0</services:flap_detection_enabled>
+    <services:process_perf_data>1</services:process_perf_data>
+    <services:retain_status_information>1</services:retain_status_information>
+    <services:retain_nonstatus_information>1</services:retain_nonstatus_information>
+    <services:notification_interval>30</services:notification_interval>
+    <services:notification_period>24 x 7</services:notification_period>
+    <services:notification_options>w,u,c,r</services:notification_options>
+    <services:notifications_enabled>1</services:notifications_enabled>
+    <services:contact_groups>Blue_Contacts</services:contact_groups>
+  </services:service>
+  <services:service id="2">
+    <services:host_name>Localhost</services:host_name>
+    <services:service_description>Check Local Load</services:service_description>
+    <services:is_volatile>0</services:is_volatile>
+    <services:check_command>check_local_load!5.0,4.0,3.0!10.0,6.0,4.0</services:check_command>
+    <services:max_check_attempts>4</services:max_check_attempts>
+    <services:normal_check_interval>5</services:normal_check_interval>
+    <services:retry_check_interval>1</services:retry_check_interval>
+    <services:active_checks_enabled>1</services:active_checks_enabled>
+    <services:passive_checks_enabled>1</services:passive_checks_enabled>
+    <services:check_period>24 x 7</services:check_period>
+    <services:parallelize_check>1</services:parallelize_check>
+    <services:obsess_over_service>1</services:obsess_over_service>
+    <services:check_freshness>0</services:check_freshness>
+    <services:freshness_threshold>0</services:freshness_threshold>
+    <services:event_handler>global_event_handler</services:event_handler>
+    <services:event_handler_enabled>1</services:event_handler_enabled>
+    <services:low_flap_threshold>0</services:low_flap_threshold>
+    <services:high_flap_threshold>0</services:high_flap_threshold>
+    <services:flap_detection_enabled>0</services:flap_detection_enabled>
+    <services:process_perf_data>1</services:process_perf_data>
+    <services:retain_status_information>1</services:retain_status_information>
+    <services:retain_nonstatus_information>1</services:retain_nonstatus_information>
+    <services:notification_interval>30</services:notification_interval>
+    <services:notification_period>24 x 7</services:notification_period>
+    <services:notification_options>w,u,c,r</services:notification_options>
+    <services:notifications_enabled>1</services:notifications_enabled>
+    <services:contact_groups>Blue_Contacts</services:contact_groups>
+  </services:service>
+ <services:service id="3">
+    <services:host_name>Localhost</services:host_name>
+    <services:service_description>Check Local Time</services:service_description>
+    <services:is_volatile>0</services:is_volatile>
+    <services:check_command>check_local_time!europe.pool.ntp.org!20!30</services:check_command>
+    <services:max_check_attempts>4</services:max_check_attempts>
+    <services:normal_check_interval>5</services:normal_check_interval>
+    <services:retry_check_interval>1</services:retry_check_interval>
+    <services:active_checks_enabled>1</services:active_checks_enabled>
+    <services:passive_checks_enabled>1</services:passive_checks_enabled>
+    <services:check_period>24 x 7</services:check_period>
+    <services:parallelize_check>1</services:parallelize_check>
+    <services:obsess_over_service>1</services:obsess_over_service>
+    <services:check_freshness>0</services:check_freshness>
+    <services:freshness_threshold>0</services:freshness_threshold>
+    <services:event_handler>global_event_handler</services:event_handler>
+    <services:event_handler_enabled>1</services:event_handler_enabled>
+    <services:low_flap_threshold>0</services:low_flap_threshold>
+    <services:high_flap_threshold>0</services:high_flap_threshold>
+    <services:flap_detection_enabled>0</services:flap_detection_enabled>
+    <services:process_perf_data>1</services:process_perf_data>
+    <services:retain_status_information>1</services:retain_status_information>
+    <services:retain_nonstatus_information>1</services:retain_nonstatus_information>
+    <services:notification_interval>30</services:notification_interval>
+    <services:notification_period>24 x 7</services:notification_period>
+    <services:notification_options>w,u,c,r</services:notification_options>
+    <services:notifications_enabled>1</services:notifications_enabled>
+    <services:contact_groups>Blue_Contacts</services:contact_groups>
+  </services:service>
+</services:services>
+

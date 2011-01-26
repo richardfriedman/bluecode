@@ -1,0 +1,29 @@
+<html>
+<head>
+<title>Blue Configuration Tool - Service Escalation Help</title>
+<link href="styles/blue_help.css" rel="stylesheet" type="text/css"/>
+</head>
+<body bgcolor="#F0F8FF">
+	<h3>Service Escalation Help</h3>
+	<p>This page allows you to define Service Escalation objects within your Blue monitoring configuration. Service Escalations should be viewed
+	as a way of escalating notifications should a Service be in a non-OK state for a certain period of time. For instance, if the Service is not
+	OK and 10 warnings have been sent, then notify the management. When defining Service Escalations, there are several pieces of information you
+	will need to provide:</p>
+		<ul>
+			<li><b>Host Name</b> - The name of the Host on which this Service resides.</li>
+			<li><b>Service Description</b> - The description of the Service on this Host.</li>
+			<li><b>Contact Group</b> - The Contact group that should be notified as a result of this escalation.</li>
+			<li><b>First Notification</b> - Identifies the number of notifications from which this escalation is effective.</li>
+			<li><b>Last Notification</b> - Identifies the number of notifications from which this escalations ceases to be effective.</li>
+			<li><b>Notification Interval</b> - The "time unit" interval in which notifications for this escalation should be sent.</li>
+		</ul>
+	
+	<p>The first notification element defines the number of notifications that must have been sent before this Escalation becomes
+	effective. For example, if 'First Notification' is set to 3 and 'Last Notification' is set to 5, this Escalation is only effective
+	after 3 notifications have been sent, and until 5 notifications have been sent. You can also define the Time Period in which it is valid
+	to send noitifications for this Escalation, and also the conditions under which this Escalation	is effective.</p>
+	
+	<p>It should be noted that Service Escalations are an optional part of your monitoring setup.</p>
+	
+</body>
+</html> 

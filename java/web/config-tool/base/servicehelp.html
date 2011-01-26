@@ -1,0 +1,47 @@
+<html>
+<head>
+<title>Blue Configuration Tool - Service Help</title>
+<link href="styles/blue_help.css" rel="stylesheet" type="text/css"/>
+</head>
+<body bgcolor="#F0F8FF">
+	<h3>Service Help</h3>
+	<p>This page allows you to define Service objects within your Blue monitoring configuration. A Service object should
+	be viewed as a attribute of a Host that you wish to monitor. Services can be fairly abstract in their definition. A check
+	for the amount of free disk space on a Host is viewed as a Service, as is the number of users that are currently on that 
+	Host. There are of course typical definitions of Services as well including verifying that your FTP server is running or
+	checking that your Mail Queue is being delivered.</p>
+	
+	<p>When defining a Service object, there are several required pieces of information. The information you must supply is as
+	follows:
+		<ul>
+			<li><b>Hostname</b> - The name of the Host that this Service runs on.</li>
+			<li><b>Service Description</b> - A short description of this Service.</li>
+			<li><b>Check Command</b> - The Command that should be used to check the status of this Service.</li>
+			<li><b>Command Arguments</b> - The Arguments (if any) that should be used as parameters to the above Command.</li>
+			<li><b>Max Check Attempts</b> - The number of times Blue will try to re-check this Service, should the check command not return OK.</li>
+			<li><b>Normal Check Interval</b> - The number of "time units" Blue should wait before actively checking this Service again.</li>
+			<li><b>Retry Check Interval</b> - The number of "time units" Blue should wait before checking this Service again after a non-OK status.</li> 
+			<li><b>Check Period</b> - The Time Period in which it is valid to make active checks of this host.</li>
+			<li><b>Notification Options</b> - This determines under what conditions notifications for this Service will be sent.</li>
+			<li><b>Notification Interval</b> - This determines the number of "time units" to wait before re-notifying a Contact that the Service is still down.</li>
+			<li><b>Notification Period</b> - This determines the Time Period in which it is valid to send Notifications.</li>
+			<li><b>Contact Groups</b> - This is the Contact Group that should be notified for this Service.</li>
+		</ul>
+	</p>
+	<p>Perhaps the most important part of defining a Service is specifying the arguments to your command that checks the Service. Typically Blue
+	plug-ins work on warning and critical thresholds. That is a Service will enter any of this two states should the Service check meet certain
+	thresholds specified by you e.g The Disk Check service is critical if there is < 10 Meg free on my Root Drive. You can specify the arguments
+	to your Service Check seperated by the '!' character. You should check the documentation for the specific plug-ins as to what arguments they expect.</p>
+	
+	<p>In order for notifications to be sent, it is imperative that you have the 'Notifications Enabled' option set. Without this options set, Blue will not perform any checking of the Host not send any notifications should
+	the state of the Service change.</p>
+	
+	<p>Should an event occur on this Service, you can define what is known as an Event Handler. In effect an Event Handler consists of a Command that should be
+	run after a certain event occurs. For instance you may wish to provide a command that sends Service monitoring information to a database after an event occurs.
+	To utilise an Event Handler, you must firstly define a Command that performs the required functionality you wish to implement should an Event occur, and then set this to
+	be the Event Handler for this Service. You must then ensure that the 'Event Handler Enabled' option is set.</p>
+	<p> 
+	<p>Other options available to you include storing the status data of this Service by ensuring that the 'Retain Status Data' options are ticked. You can also specify
+	thresholds for flapping on this Service. For a detailed explanation of flapping, please refer to the main Blue Documentation.</p> 
+</body>
+</html> 

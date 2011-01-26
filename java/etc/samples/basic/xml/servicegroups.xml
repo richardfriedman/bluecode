@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<servicegroups:servicegroups xmlns:servicegroups="http://localhost:8080/blue-config/ns/servicegroups">
+  <servicegroups:servicegroup id="0">
+    <servicegroups:servicegroup_name>Basic Blue Service</servicegroups:servicegroup_name>
+    <servicegroups:alias>Example Blue Service Group</servicegroups:alias>
+    <servicegroups:members>Localhost,PING</servicegroups:members>
+  </servicegroups:servicegroup>
+</servicegroups:servicegroups>
+

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns="http://localhost:8080/blue-config/ns/hostescalation"
+	    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	    targetNamespace="http://localhost:8080/blue-config/ns/hostescalation">
+	
+	<xsd:include schemaLocation="http://localhost:8080/blue-config/ns/generic.xsd"/>
+	    
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+			XML Schema for HostEscalation Definition within Blue Monitoring Framework.
+		</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:element name="host_escalations">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="hostescalation" type="host-escalation" minOccurs="1" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:complexType name="host-escalation">
+		<xsd:sequence>
+			<xsd:element name="host_name" type="xsd:token"/>
+			<xsd:element name="hostgroup_name" type="xsd:token" minOccurs="0"/>
+			<xsd:element name="contact_groups" type="token-list"/>
+			<xsd:element name="first_notification" type="xsd:positiveInteger"/>
+			<xsd:element name="last_notification" type="xsd:positiveInteger"/>
+			<xsd:element name="notification_interval" type="xsd:positiveInteger"/>
+			<xsd:element name="escalation_period" type="xsd:token" minOccurs="0"/>
+			<xsd:element name="escalation_options" type="escalation-options-list" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:ID"/>
+	</xsd:complexType>
+	
+	<xsd:simpleType name="escalation-options">
+		<xsd:restriction base="xsd:token">
+			<xsd:pattern value="d"/>
+			<xsd:pattern value="u"/>
+			<xsd:pattern value="r"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:complexType name="escalation-options-list">
+		<xsd:sequence>
+			<xsd:element name="escalation_option" type="escalation-options" minOccurs="1" maxOccurs="3"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+</xsd:schema>

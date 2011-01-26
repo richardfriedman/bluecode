@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns="http://localhost:8080/blue-config/ns/hostdependency"
+	    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	    targetNamespace="http://localhost:8080/blue-config/ns/hostdependency">
+	
+	<xsd:include schemaLocation="http://localhost:8080/blue-config/ns/generic.xsd"/>
+	    
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+			XML Schema for HostDependency Definition within Blue Monitoring Framework.
+		</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:element name="hostdependencies">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="hostdependency" minOccurs="1" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:complexType name="hostdependency">
+		<xsd:sequence>
+			<xsd:element name="dependent_host_name" type="xsd:token"/>
+			<xsd:element name="host_name" type="xsd:token"/>
+			<xsd:element name="inherits_parents" type="trueOrFalse" minOccurs="0"/>
+			<xsd:element name="execution_failure_criteria" type="failure-criteria-list" minOccurs="0"/>
+			<xsd:element name="notification_failure_criteria" type="failure-criteria-list" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:ID"/>
+	</xsd:complexType>
+
+	<xsd:simpleType name="failure-criteria">
+		<xsd:restriction base="xsd:token">
+			<xsd:pattern value="o"/>
+			<xsd:pattern value="d"/>
+			<xsd:pattern value="u"/>
+			<xsd:pattern value="p"/>
+			<xsd:pattern value="n"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:complexType name="failure-criteria-list">
+		<xsd:sequence>
+			<xsd:element name="failure_code" type="failure-criteria" minOccurs="1" maxOccurs="5"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

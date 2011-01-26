@@ -1,0 +1,26 @@
+<html>
+<head>
+<title>Blue Configuration Tool - Contact Help</title>
+<link href="styles/blue_help.css" rel="stylesheet" type="text/css"/>
+</head>
+<body bgcolor="#F0F8FF">
+	<h3>Contact Help</h3>
+	<p>This page allows you to define Contact objects within your Blue monitoring configuration. A Contact object should
+	be viewed as a person that is notified when a event occurs on either a Host or Service object. You have the ability to 
+	specify several pieces of information about the Contact including when and how they should be contacted.</p>
+	
+	<p>When defining a Contact object, there are several required pieces of information. The information you must supply is as
+	follows:
+		<ul>
+			<li><b>Contact Name</b> - The name of this Contact.</li>
+			<li><b>Alias</b> - The Alias of this Contact.</li>
+			<li><b>Host Notification Period</b> - The Time Period in which it is valid to send Host Notifications to this Contact.</li>
+			<li><b>Service Notification Period</b> - The Time Period in which it is valid to send Service Notifications to this Contact.</li>
+			<li><b>Host Notification Options</b> - The conditions under which Host notifications will be sent to this Contact.</li>
+			<li><b>Service Notification Options</b> - The conditions under which Service notifications will be sent to this Contact</li>
+		</ul>
+	</p>
+	<p>When defining a Contact you also have the ability to specify email and pager contact information. This information can be used when specifying the
+	commands to use to notify the Contact. For instance it is possible to use the email address of a Contact through the $EMAILADDRESS$ macro.</p>
+</body>
+</html> 

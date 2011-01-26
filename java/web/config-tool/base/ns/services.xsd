@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns="http://localhost:8080/blue-config/ns/services"
+	    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	    targetNamespace="http://localhost:8080/blue-config/ns/services">
+	
+	<xsd:include schemaLocation="http://localhost:8080/blue-config/ns/generic.xsd"/>
+	
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+			XML Schema for Service Definition within Blue Monitoring Framework.
+		</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:element name="services">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="service" type="service" minOccurs="1" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:complexType name="service">
+		<xsd:sequence>
+			<xsd:element name="use" type="xsd:token" minOccurs="0"/>
+			<xsd:element name="host_name" type="xsd:token"/>
+			<xsd:element name="service_description" type="xsd:token"/>
+			<xsd:element name="servicegroups" type="token-list" minOccurs="0"/>
+			<xsd:element name="is_volatile" type="trueOrFalse"/>
+			<xsd:element name="check_command" type="xsd:token" minOccurs="0"/>
+			<xsd:element name="max_check_attempts" type="xsd:positiveInteger"/>
+			<xsd:element name="normal_check_interval" type="xsd:positiveInteger"/>
+			<xsd:element name="retry_check_interval" type="xsd:positiveInteger"/>
+			<xsd:element name="active_checks_enabled" type="trueOrFalse" minOccurs="0"/>
+			<xsd:element name="passive_checks_enabled" type="trueOrFalse" minOccurs="0"/>
+			<xsd:element name="check_period" type="xsd:token"/>
+			<xsd:element name="parallelize_check" type="trueOrFalse" minOccurs="0"/>
+			<xsd:element name="obsess_over_service" type="trueOrFalse" minOccurs="0"/>
+			<xsd:element name="check_freshness" type="trueOrFalse" minOccurs="0"/>
+			<xsd:element name="freshness_threshold" type="xsd:positiveInteger" minOccurs="0"/>
+			<xsd:element name="event_handler" type="xsd:token" minOccurs="0"/>
+			<xsd:element name="event_handler_enabled" type="trueOrFalse" minOccurs="0"/>
+			<xsd:element name="low_flap_threshold" type="xsd:positiveInteger" minOccurs="0"/>
+			<xsd:element name="high_flap_threshold" type="xsd:positiveInteger" minOccurs="0"/>
+			<xsd:element name="flap_detection_enabled" type="trueOrFalse" minOccurs="0"/>
+			<xsd:element name="process_perf_data" type="trueOrFalse" minOccurs="0"/>
+			<xsd:element name="retain_status_information" type="trueOrFalse" minOccurs="0"/>
+			<xsd:element name="retain_nonstatus_information" type="trueOrFalse" minOccurs="0"/>
+			<xsd:element name="notification_interval" type="xsd:positiveInteger"/>
+			<xsd:element name="notification_period" type="xsd:token"/>
+			<xsd:element name="notification_options" type="notification-options-list"/>
+			<xsd:element name="notifications_enabled" type="trueOrFalse" minOccurs="0"/>
+			<xsd:element name="contact_groups" type="token-list"/>
+			<xsd:element name="stalking_options" type="stalking-options-list"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:ID"/>
+	</xsd:complexType>
+			
+	<xsd:simpleType name="notification-options">
+		<xsd:restriction base="xsd:token">
+			<xsd:pattern value="w"/>
+			<xsd:pattern value="u"/>
+			<xsd:pattern value="c"/>
+			<xsd:pattern value="r"/>
+			<xsd:pattern value="f"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="stalking-options">
+		<xsd:restriction base="xsd:token">
+			<xsd:pattern value="o"/>
+			<xsd:pattern value="w"/>
+			<xsd:pattern value="u"/>
+			<xsd:pattern value="c"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:complexType name="notification-options-list">
+		<xsd:sequence>
+			<xsd:element name="entry" type="notification-options" minOccurs="1" maxOccurs="5"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="stalking-options-list">
+		<xsd:sequence>
+			<xsd:element name="entry" type="stalking-options" minOccurs="1" maxOccurs="4"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

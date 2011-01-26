@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns="http://localhost:8080/blue-config/ns/blue-plugin"
+	    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	    targetNamespace="http://localhost:8080/blue-config/ns/blue-plugin">
+	
+	<xsd:include schemaLocation="http://localhost:8080/blue-config/ns/generic.xsd"/>
+	    
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+			XML Schema for Blue Plugin Manifest Definition.
+		</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:element name="blue_plugin_manifest" type="blue-plugin-manifest"/>
+	
+	<xsd:complexType name="blue-plugin-manifest">
+		<xsd:sequence>
+			<xsd:element name="plugin_id" type="xsd:token"/>
+			<xsd:element name="plugin_name" type="xsd:token"/>
+			<xsd:element name="plugin_version" type="xsd:token"/>
+			<xsd:element name="plugin_category" type="xsd:token"/>
+			<xsd:element name="plugin_creator" type="xsd:token"/>
+			<xsd:element name="plugin_creator_email" type="xsd:token" minOccurs="0"/>
+			<xsd:element name="plugin_description" type="xsd:token"/>
+			<xsd:element name="plugin_homepage_url" type="validURL" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

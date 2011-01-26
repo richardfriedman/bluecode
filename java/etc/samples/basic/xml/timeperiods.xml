@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<timeperiods:timeperiods xmlns:timeperiods="http://localhost:8080/blue-config/ns/timeperiods">
+  <timeperiods:timeperiod id="0">
+    <timeperiods:timeperiod_name>24 x 7</timeperiods:timeperiod_name>
+    <timeperiods:alias>All Day, Every Day.</timeperiods:alias>
+    <timeperiods:sunday>00:00-24:00</timeperiods:sunday>
+    <timeperiods:monday>00:00-24:00</timeperiods:monday>
+    <timeperiods:tuesday>00:00-24:00</timeperiods:tuesday>
+    <timeperiods:wednesday>00:00-24:00</timeperiods:wednesday>
+    <timeperiods:thursday>00:00-24:00</timeperiods:thursday>
+    <timeperiods:friday>00:00-24:00</timeperiods:friday>
+    <timeperiods:saturday>00:00-24:00</timeperiods:saturday>
+  </timeperiods:timeperiod>
+</timeperiods:timeperiods>
+

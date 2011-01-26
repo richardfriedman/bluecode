@@ -1,0 +1,96 @@
+This is besides the blue console, which is meant to be a mirror of the nagios console.  More to do on that front, but for now...
+
+I got deep with Rob's work on the web application and believe I have a strong understanding of what he is doing. I think the blue-config tool will/should act as a base for further applications.    However, I would like to talk about refactoring a couple of things.   First I would like to walk through the structure of his app, and how to build your own application or just add into this application.  (Note: my work started in an attempt to build out BLUE-for-SALESFORCE type applications.
+
+Blue-config tool is a JSF based application, which implies there will be three packaging components to be aware of.
+1. LIB directory
+** Still trying to figure out which libs will be packaged, but this is VERY important.  As they will typically be packaged in the root of JETTY. So they will be part of the startup classpath
+2. web.xml
+3. faces.xml 
+Both of which are standard configuration files.
+
+The structure of the application within the build system is as follows
+[blue]/java/web/[project]
+  base/
+     WEB-INF/
+       faces.xml
+       web.xml
+       lib/ [*** lib files only to be packaged with WAR **** ]
+     images/
+     scripts/
+     styles/
+  lib/
+    [*** lib files to be packaged with container ****]
+
+Now let's talk about the application and getting around.
+First object to talk about is the accountHandler
+
+Account Handler properties include
+ * configLocation - location of existing configuration files which to read in
+ * outputLocation - if writing/exporting to a different location the place to write to
+ * userSetDirectory - a boolean flag to indicate if the output location hasa been set. 
+ 
+After the accountHandler there are two categories of beans to consider.
+a. the handler objects.  
+Built to handle add/removing/modifying/persisting/... the model
+b. the model objects.
+Objects which represent the model of the blue components.
+
+****** HANDLERS **********
+
+=== HostHandler ====
+ ** Properties
+ * host - host object which has been read in
+ * modifyHost - host object property which has been modified
+ 
+ ** Methods
+ * addHost
+ * deleteHost
+ * modifyHost
+ * addTemplate
+ * getHostCount 
+ * getTemplateCount
+ * useTemplate
+  
+ ** Conditions to key off
+ * "failure"
+ * "delete-success"
+ * "modify-success"
+ * "write-failure"
+ * "sucess"  
+ * "add-success"
+
+=== CommandHandler === 
+ ** Properties
+ * command - read only command object
+ * modifyCommand - read/write command object
+ 
+ ** Methods
+ * addCommand
+ * modifyCommand
+ * deleteCommand
+ -- Retrieval Commands
+ * getSortedCommands
+ * getCommands
+ * getCommandCount
+ 
+ ** Conditions
+ * "add-success"
+ * "write-failure"
+ * "modify-success"
+ * "failure"
+ * "delete-success"
+
+=== TimePeriodHandler ==
+
+ 
+
+ ******* MODEL OBJECTS *********
+ 
+ Host
+ The host object represents in a primitive form all the details of the host object.  It has set/get methods for everything.
+ There are two methods to get the details of the object 
+ * getObjectMapDetails() which returns a HashMap<String,String>
+ * getObjectDetails() which returns a List<String>
+ 
+ 

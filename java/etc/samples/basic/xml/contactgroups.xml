@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contactgroups:contactgroups xmlns:contactgroups="http://localhost:8080/blue-config/ns/contactgroups">
+  <contactgroups:contactgroup id="0">
+    <contactgroups:contactgroup_name>Blue_Contacts</contactgroups:contactgroup_name>
+    <contactgroups:alias>Example Blue Contacts</contactgroups:alias>
+    <contactgroups:members>Blue Admin</contactgroups:members>
+  </contactgroups:contactgroup>
+</contactgroups:contactgroups>
+

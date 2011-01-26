@@ -1,0 +1,94 @@
+
+------------------
+Developing PLUGINS
+------------------
+
+Plugins in Blue/Nagios are implementing main to read the args, write a line stdout and exit with proper code.
+
+To start....
+
+A. Use GPL header
+B. The package must be org.blue.plugins;
+C. THe base class to extend is "public class check_x extends check_base { ..."
+D. Implement a main as such
+public static void main (String[] args) {
+	new check_[class]().process_request( args );
+}
+
+E. Understand the flow of a plugin in execution
+ * The check_base.process_request(String[] args ) has the following flow
+ * 1.  call super.init_command()
+ * 2.  setLanguage to US TODO: This should be changed to support multi-language
+ * 3.  call process_arguments( args ) which intern
+ * 3a. calls super.add_command_arguments( options ), this enables super to add it's own parameters
+ * 3b. parse command line
+ * 3c. process base args (?,h,V,v,t)
+ * 3d. for non-base args call super.process_command_option( option )
+ * 3e. for remaining arguments call super.process_command_arguments( args_remaining)
+ * 3f. all processed, enabled super to validate, super.validate_command_arguements()
+ * 4. execute the check, super.execute_check
+ * 5.  get the state and the message
+ * 5a. check_state
+ * 5b. check_message
+ * 6. Print to stdout the message
+ * 7. exit with state
+
+F. Based on the above implement the following methods as needed
+** First the methods to process the command line
+   public void init_command() -- set some of the fields for documentation
+   public void add_command_arguments( Options options )  -- add your arguments
+   public boolean process_command_option ( Option o ) -- this will be called for each option processed on the command line
+   		if you want to be 'strict' in processing options return false (also set your state to UNKNOWN)
+   public boolean process_command_arguments( String[] argv ) -- process any remaining arguments
+   public boolean validate_command_arguments () -- validate all required arguments and settings are correct
+
+** Second the method to execute the check
+   public boolean execute_check() 
+
+** Third the methods to get the 'output line' and 'exit code'
+   public abstract int check_state();
+   public abstract String check_message();
+
+** the following methods are to support a standard format for documentation, see below for notes on docs.
+   protected abstract String getCopyright();
+   protected abstract String getAuthor();
+   protected abstract String getDescription();
+   protected abstract String getNotes();
+
+----------------------------------
+Adding plugins to the build system
+----------------------------------
+** Note: I don't like the architecture for this today, so it will change but it's pretty simple right now.
+1. Any libraries needed for your plugin should be added to 
+java/plugins/lib
+
+2. in build.xml go to the make-plugins target and added the following for your plugin
+ 		<jar destfile="${dist-plugins}/blue-check-[yourcheck].jar">
+			<manifest>
+				<attribute name="Class-Path" value="etc/ lib/blue-plugins.jar lib/xyz.jar" />
+				<attribute name="Main-class" value="org.blue.plugins.check_[yourcheck]" />
+			</manifest>
+		</jar>
+
+Notice the classpath settings.
+   etc/  -- this enables plugins to load stuff from config file. However, this is really only valid for 
+     		   blue deployments, and not generic nagios deployments
+   lib/blue-plugins.jar -- jar which contains all built plugins
+   lib/xyz.jar -- which every jar files from lib you might need
+
+----------------------------------
+Plugin DOCUMENTATION
+----------------------------------
+Care needs to be taken in documentation.
+
+----------------------------------
+Plugin GENERATOR!
+----------------------------------
+** Need to discuss.
+
+----------------------------------
+Plugin distribution
+----------------------------------
+Plugins are both packed in the master distribution but will aslo be available as standalone plugins
+There is a task dist-plugins which will create a RPM and tar.gz distribution 
+Note: the rpm build will lay down the plugins for NAGIOS

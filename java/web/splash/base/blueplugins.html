@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>Blue Plugins</title>
+<link href="styles/blue.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div id="content">
+<a href="index.html">Home</a><br/>
+<h3>Blue Plugins</h3>
+
+<p>There are a number of Java plugins that are available with the first version of Blue. These plugins attempt to be faithful
+ports of their Nagios counterparts and operate in a similar fashion. They all return exit codes indicating the status of the Host/Service
+that they are being used to monitor, and they also all return a single line of output giving more information about their return status.</p>
+
+<p>The Java plugins supplied with Blue at this stage all reside within the base directory of your Blue installation. Provided you have
+Java installed, you can run all of the plugins from the command line using the following syntax:
+	<ul>
+		<li>java -jar plugin_name plugin_options</li>
+	</ul>
+
+All plugins should support being run with the -h option to give you more information on how to use them.</p>
+
+<p>To use the Blue Java plugins with your Blue installation, you will need to define a command that instructs Blue to
+launch the .jar file. We recommend that you also define a macro that points to the directory in which you have the Blue
+Java plugins installed (if you have used the basic configuration provided by the startup scripts, this is done for you).
+</p>
+
+<p>Defining a command to use the Blue Java plugins should leave you with something similar to this:</p>
+<p>define command{<br/>
+	command_name	check_local_time<br/>
+	command_line	java -jar $USER2$/blue-check-local-time.jar -H $ARG1$ -w $ARG2$ -c $ARG3$<br/>
+}
+</p>
+
+<p>The above example assumes that you have defined a macro with id $USER2$ to point to the directory containing your Blue
+plugins</p>
+
+<p>You should attempt to keep the Blue plugins within the base directory of your Blue installation. If for any reason you 
+are required to move the plugins, you will need to add the required .jar files from the ~lib directory of your Blue installation to your classpath.
+The reason for this is that many of the plugins make use of libraries contained within the ~lib directory and the code for all current Blue plugins is stored
+within the blue-plugins.jar file.</p>
+
+<p>For information on developing your own Java plugins to use with Blue, please visit the <a href="plugindevelopers.html">Plugin Development</a> page.
+</p>
+<a href="index.html">Home</a>
+</div>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>Blue Components</title>
+<link href="styles/blue.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div id="content">
+<a href="index.html">Home</a><br/>
+<h3>Blue Components</h3>
+
+<p> There are several components to the Blue monitoring solution of which you should be aware.
+The first of these components is the Blue Server which is aptly named blue-server.jar and this resides in the base directory
+of your install location.</p>
+
+<b>2.1: Blue Server:</b>
+<p>
+The Blue Server encapsulates all of the monitoring functionality that is found within Nagios. It performs monitoring of Hosts, the Services on these Hosts and also applies Notification and Event Handling logic.
+You can run the Blue Server in a headless manner meaning that you do not have to use the Blue Console (see below) to view the output of the monitoring process.
+Running Blue in a headless manner will still allow all Notifications to be received and event handling to be properly dealt with.
+</p>
+
+<b>2.2: Blue Console:</b>
+<p>
+Blue Console should be seen as a way to view your current Blue monitoring situation. It allows you to gather feedback on which Services (if any) are in a problem state.
+Through the Blue Console it is also possible to add Comment data to each Host and Service, schedule Downtime of your Hosts and Services, commit Commands to the Blue External Command
+File and other such operations. It also provides a graphical layout of your current monitoring situation.</p>
+
+<p>The Blue Console is available through a website and is launched automatically via an embedded web server. The web server will listen by default on port 8080 of the machine
+that you launch the Console on. This means that you must either have the 8080 port available or configure the embedded Jetty webserver to listen on another port. To do this 
+please consult the jetty.xml file contained within the etc/ directory of your Blue installation.</p>
+
+<b>2.3: Blue Config Tool:</b>
+
+<p>The Blue Config Tool is an application that is designed to help you create and manage your current Blue configuration.
+It tries to take you away from needing to edit text files by hand and instead provides you with a Web Interface that anyone can use to generate
+the files that are used by Blue to complete your monitoring solution. Should you have it installed, the Config Tool will be available to you at http://localhost:8080/blue-config.
+It allows you to specify a directory into which it will place the configuration files needed to start Blue. We suggest that you use the <BLUE_HOME>/etc directory to store your configuration files.</p>
+ 
+<p>The Blue Config Tool also comes with it's own set of documentation which is available once the tool has started.</p>
+<a href="index.html">Home</a>
+</div>
+</body>
+</html>

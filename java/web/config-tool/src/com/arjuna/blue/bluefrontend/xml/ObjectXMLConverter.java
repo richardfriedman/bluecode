@@ -1,0 +1,291 @@
+package com.arjuna.blue.bluefrontend.xml;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
+
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
+
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.JDOMException;
+import org.jdom.input.SAXBuilder;
+import org.jdom.transform.JDOMSource;
+import org.jdom.xpath.XPath;
+
+import com.arjuna.blue.bluefrontend.faces.Utils;
+
+/*
+ *  	This class acts as a mechanism for transforming all defined XML documents associated with
+ *  the Blue configuration tool into the required Blue/Nagios format.
+ *  
+ *  	The class acts upon three type of objects. Firstly it will perform transforming for the majority
+ *  of objects associated with the Blue/Nagios tool. Namely hosts,services,timeperiods etc.
+ *  	
+ *  	Secondly it will perform transforming on the main Blue configuration file turning this into a format
+ *  that can be used with both Blue and Nagios. Finally the class can perform transforming of the user defined
+ *  macros that appear into the resource.cfg file. 
+ */
+
+public class ObjectXMLConverter
+{
+	
+	/* Default output directory. This will be over-ridden by the user when they start. */
+	
+	private String outputDirectory = "output";
+	
+	/* Default output file locations. These cannot be changed for version 0.1 */
+	private String[] outputFileLocations = new String[]{
+			"hosts.cfg",
+			"hostgroups.cfg",
+			"services.cfg",
+			"servicegroups.cfg",
+			"contacts.cfg",
+			"contactgroups.cfg",
+			"timeperiods.cfg",
+			"commands.cfg",
+			"servicedependencies.cfg",
+			"serviceescalations.cfg",
+			"hostdependencies.cfg",
+			"hostescalations.cfg",
+			"hostextinfo.cfg",
+			"serviceextinfo.cfg"
+	};
+	
+	/* SAXBuilder for parsing our XML Documents. */
+	 
+	private SAXBuilder builder = new SAXBuilder();
+		
+	/*
+	 * Blank Constructor;
+	 */
+	
+	public ObjectXMLConverter()
+	{
+		
+	}
+	
+	/* Constructor that sets the output Location from the word go */
+	public ObjectXMLConverter(String outputLocation)
+	{
+		this.outputDirectory = outputLocation;
+	}
+	
+	/*
+	 * Set the current output File location.
+	 */
+	
+	public void setOutputDirectory(String outputDirectory)
+	{
+		this.outputDirectory = outputDirectory;
+		
+		File file;
+		
+		for(String s: outputFileLocations)
+		{
+			file = new File(outputDirectory + "/" + s);
+			
+			if(!file.exists())
+			{
+				try
+				{
+					file.createNewFile();
+				}
+				catch(Exception ex)
+				{}
+			}
+		}
+	}
+	
+	
+	/*
+	 * Get the current output file location.
+	 */
+	
+	public String getOutputDirectory()
+	{
+		return this.outputDirectory;
+	}
+	
+	/*
+	 * Method that takes a given document and the objectType within said document, and
+	 * transforms the XML content into Nagios/Blue configuration file format.
+	 * 
+	 * @param = Document doc, the XML document you wish to transform.
+	 * @param = int objectType, the integer value of the objectType (used for output location).
+	 * 
+	 * @return = boolean, true if the process completed successfully.
+	 */
+	
+	public void convertDocument(String docLocation,int objectType)throws TransformerConfigurationException,TransformerException,IOException,JDOMException
+	{
+			Document doc = builder.build(outputDirectory + "/xml/" + docLocation);
+			JDOMSource js = new JDOMSource(doc);
+						
+			StreamSource transformSheet = new StreamSource(Thread.currentThread().getContextClassLoader().getResourceAsStream("com/arjuna/blue/bluefrontend/xml/transforms.xsl"));
+						
+			javax.xml.transform.TransformerFactory transformerFactory = javax.xml.transform.TransformerFactory.newInstance();
+			javax.xml.transform.Transformer transformer = transformerFactory.newTransformer(transformSheet);
+			
+			outputDirectory = Utils.getCurrentOutputLocation();
+			StreamResult out = new StreamResult(new FileWriter(outputDirectory + "/" + outputFileLocations[objectType]));
+			transformer.transform(js,out);
+			
+	}
+	
+	/*
+	 * This is a method for writing out the content of the user defined macros into the Blue/Nagios
+	 * format. This method simply locates the macros.xml file from it's default location and for each
+	 * macro within that file, outputs them in the correct format.
+	 * 
+	 * @return = boolean, true if the operation was a success.
+	 */
+		
+	public boolean convertMacros() throws JDOMException,IOException
+	{
+		outputDirectory = Utils.getCurrentOutputLocation();
+		XPath x = XPath.newInstance("macros:macros/macros:macro");
+		Document objectDoc = builder.build(outputDirectory + "/xml/macros.xml");
+		List list = x.selectNodes(objectDoc);
+		BufferedWriter out = new BufferedWriter(new FileWriter(outputDirectory + "/resource.cfg"));
+		
+		out.write("################################################################################################\n");
+		out.write("#This file is automatically generated by the Blue framework. Please be careful when            #\n");
+		out.write("#editing this file by hand as mistakes may cause unexpected behaviour in your monitoring setup.#\n");
+		out.write("################################################################################################\n\n");
+		
+		for(Object o: list)
+		{
+			Element e = (Element)o;
+			
+			String id =  e.getAttribute("macro_id").getValue();
+			String macroValue = "";
+			
+			for(Object ob: e.getChildren())
+			{
+				Element el = (Element) ob;
+				
+				if(el.getName().equals("macro_value"))
+				{
+					macroValue = el.getText();
+				}
+			}
+			
+			out.write(id + "=" + macroValue + "\n");
+			
+		}
+		
+		out.write("#EOF");
+		out.close();
+		return true;
+	}
+	
+	/*
+	 * Method that is used to convert a blue XML document into the required Nagios/Blue format.
+	 * 
+	 * @param = String configLocation, the location of the XML config file you wish to transform.
+	 * @param = String outputLocation, the output location for the blue.cfg file. 
+	 * 
+	 * @return = boolean, true if the operation is successful.
+	 */
+	
+	public boolean convertBlueMainConfig(String configLocation,String outputLocation) throws JDOMException,IOException
+	{
+		outputDirectory = Utils.getCurrentOutputLocation();
+		Document doc = builder.build(outputDirectory + "/xml/" + configLocation);
+		Element root = doc.getRootElement();
+				
+		List list = root.getChildren();
+		
+		if(list.size() == 0)
+			return false;
+				
+		BufferedWriter out = new BufferedWriter(new FileWriter(outputDirectory + "/" + outputLocation));
+		
+		out.write("################################################################################################\n");
+		out.write("#This file is automatically generated by the Blue framework. Please be careful when            #\n");
+		out.write("#editing this file by hand as mistakes may cause unexpected behaviour in your monitoring setup.#\n");
+		out.write("################################################################################################\n\n");
+		
+		for(Object o : list)
+		{
+			Element e = (Element)o;
+			out.write(e.getName() + "=" + e.getText() + "\n");
+		}
+		
+		out.write("#EOF");
+		out.flush();
+		out.close();
+		return true;
+	}
+	
+	/*
+	 *	Method that is used to convert a Blue XML document into the required Nagios/Blue format.
+	 *
+	 * @param = Document doc, the document object that you wish to transform.
+	 * @param = String outputLocation, the output location of the blue.cfg file.
+	 * 
+	 * @return = boolean, true if the operation is successful.
+	 */
+	
+	public boolean convertBlueMainConfig(Document doc,String outputLocation) throws IOException
+	{
+		Element root = doc.getRootElement();
+				
+		List list = root.getChildren();
+		
+		
+		if(list.size() == 0)
+		{
+			return false;
+		}
+		
+		BufferedWriter out = new BufferedWriter(new FileWriter(outputLocation));
+		
+		out.write("################################################################################################\n");
+		out.write("#This file is automatically generated by the Blue framework. Please be careful when            #\n");
+		out.write("#editing this file by hand as mistakes may cause unexpected behaviour in your monitoring setup.#\n");
+		out.write("################################################################################################\n\n");
+		
+		
+		for(Object o : list)
+		{
+			Element e = (Element)o;
+			out.write(e.getName() + " = " + e.getText() + "\n");
+		}
+		
+		out.write("#EOF");
+		out.flush();
+		out.close();
+		
+		return true;
+	}
+	
+	/*
+	 * Returns a string array of the current output file locations.
+	 * 
+	 * @return = String[], current output file locations.
+	 */
+	
+	public String[] getOutputFileLocations()
+	{
+		return outputFileLocations;
+	}
+	
+	/*
+	 *  Allows the specification of output file locations.
+	 *  
+	 *  @param = String filelocation, the desired location for output.
+	 *  @param = int objectType, the object type associated with this output location.
+	 */
+	
+	public void setOutputFileLocation(String fileLocation, int objectType)
+	{
+		outputFileLocations[objectType] = fileLocation;
+	}
+}

@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://jetty.mortbay.org/configure.dtd">
+
+<!-- =============================================================== -->
+<!-- Configure the Jetty Server                                      -->
+<!-- =============================================================== -->
+<Configure id="Server" class="org.mortbay.jetty.Server">
+
+    <!-- =========================================================== -->
+    <!-- Server Thread Pool                                          -->
+    <!-- =========================================================== -->
+    <Set name="ThreadPool">
+      <New class="org.mortbay.thread.BoundedThreadPool">
+        <Set name="minThreads">10</Set>
+        <Set name="maxThreads">100</Set>
+      </New>
+    </Set>
+
+
+    <!-- =========================================================== -->
+    <!-- Set connectors                                              -->
+    <!-- =========================================================== -->
+    <!-- One of each type!                                           -->
+    <!-- =========================================================== -->
+    <Set name="connectors">
+      <Array type="org.mortbay.jetty.Connector">
+
+        <!-- Use this connector for many frequently idle connections and for threadless continuations. -->
+        <Item>
+          <New class="org.mortbay.jetty.nio.SelectChannelConnector">
+            <Set name="port">8080</Set>
+            <Set name="maxIdleTime">30000</Set>
+            <Set name="Acceptors">10</Set>
+          </New>
+        </Item>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- Add a HTTPS SSL listener on port 8443                           -->
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!--
+        <Item>
+          <New class="org.mortbay.jetty.security.SslSocketConnector">
+            <Set name="Port">0</Set>
+            <Set name="maxIdleTime">30000</Set>
+            <Set name="Keystore"><SystemProperty name="jetty.home" default="." />/etc/keystore</Set>
+            <Set name="Password">OBF:1vny1zlo1x8e1vnw1vn61x8g1zlu1vn4</Set>
+            <Set name="KeyPassword">OBF:1u2u1wml1z7s1z7a1wnl1u2g</Set>
+          </New>
+        </Item>
+        -->
+      </Array>
+    </Set>
+
+    <!-- =========================================================== -->
+    <!-- Set handlers                                                -->
+    <!-- =========================================================== -->
+    <Set name="handler">
+      <New id="Handlers" class="org.mortbay.jetty.handler.HandlerCollection">
+        <Set name="handlers">
+         <Array type="org.mortbay.jetty.Handler">
+           <Item><New id="Contexts" class="org.mortbay.jetty.handler.ContextHandlerCollection"/></Item>
+           <Item><New id="DefaultHandler" class="org.mortbay.jetty.handler.DefaultHandler"/></Item>
+           <!-- Item><New id="RequestLog" class="org.mortbay.jetty.handler.RequestLogHandler"/></Item -->
+         </Array>
+        </Set>
+      </New>
+    </Set>
+
+	<Call name="addLifeCycle">
+	  <Arg>
+	    <New class="org.mortbay.jetty.deployer.WebAppDeployer">
+	      <Set name="contexts"><Ref id="Contexts"/></Set>
+	      <Set name="webAppDir"><SystemProperty name="jetty.home" default="."/>/webapps</Set>
+	      <Set name="parentLoaderPriority">false</Set>
+	      <Set name="extract">true</Set>
+	      <Set name="allowDuplicates">false</Set>
+	      <Set name="defaultsDescriptor"><SystemProperty name="jetty.home" default="."/>/etc/webdefault.xml</Set>
+	    </New>
+	  </Arg>
+	</Call>
+	
+
+    <!-- =========================================================== -->
+    <!-- Configure Realms                                            -->
+    <!-- =========================================================== -->
+    <Set name="UserRealms">
+      <Array type="org.mortbay.jetty.security.UserRealm">
+        <Item>
+          <New class="org.mortbay.jetty.security.HashUserRealm">
+            <Set name="name">Blue Realm</Set>
+            <Set name="config">etc/realm.properties</Set>
+          </New>
+        </Item>
+      </Array>
+    </Set>
+    
+    <!-- =========================================================== -->
+    <!-- Configure Request Log                                       -->
+    <!-- =========================================================== -->
+    <!--  uncomment for a request log (and create logs directory) 
+    <Set name="requestLog">
+       <New id="requestLogImpl" class="org.mortbay.jetty.NCSARequestLog">
+          <Arg><SystemProperty name="jetty.home" default="."/>/logs/yyyy_mm_dd.request.log</Arg>
+          <Set name="retainDays">90</Set>
+          <Set name="append">true</Set>
+          <Set name="extended">false</Set>
+          <Set name="LogTimeZone">GMT</Set>
+       </New>
+    </Set>
+    -->
+
+    <!-- =========================================================== -->
+    <!-- extra options                                               -->
+    <!-- =========================================================== -->
+    <Set name="stopAtShutdown">true</Set>
+
+</Configure>

@@ -1,0 +1,31 @@
+<project name="BlueCommon" default="dist">
+	
+	<property file="../../ant/build-common.properties"/>
+	<property file="../../ant/default-component.properties"/>
+	<property file="component.properties"/>
+	
+	<target name="init">
+		<mkdir dir="${build.dir}"/>
+		<mkdir dir="${dist.dir}"/>
+	</target>
+	
+	<target name="compile" depends="init">
+		<javac srcdir="${src.dir}" destdir="${build.dir}" optimize="true" verbose="false">
+			<classpath>
+				<fileset dir="${project.lib.dir}" includes="log4j-1.2.13.jar"/>
+			</classpath>
+		</javac>
+	</target>
+	
+	<target name="make" depends="compile">
+		<jar basedir="${build.dir}" file="${dist.dir}/blue-common.jar"/>
+	</target>
+	
+	<target name="dist" depends="make">
+	</target>
+	
+	<target name="clean">
+		<delete dir="${build.dir}"/>
+		<delete dir="${dist.dir}"/>
+	</target>
+</project>

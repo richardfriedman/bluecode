@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns="http://localhost:8080/blue-config/ns/commands"
+	    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	    targetNamespace="http://localhost:8080/blue-config/ns/commands">
+	
+	<xsd:include schemaLocation="http://localhost:8080/blue-config/ns/generic"/>
+	    
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+			XML Schema for Command Definition within Blue Monitoring Framework.
+		</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:element name="commands">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="command" type="command" minOccurs="1" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:complexType name="command">
+		<xsd:sequence>
+			<xsd:element name="command_name" type="xsd:token"/>
+			<xsd:element name="command_line" type="xsd:token"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:ID"/>
+	</xsd:complexType>
+
+</xsd:schema>

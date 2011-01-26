@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns="http://localhost:8080/blue-config/ns/macros"
+	    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	    targetNamespace="http://localhost:8080/blue-config/ns/macros">
+	
+	<xsd:include schemaLocation="http://localhost:8080/blue-config/ns/generic.xsd"/>
+	    
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+			XML Schema for User-Defined Macro Definition within Blue Monitoring Framework.
+		</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:element name="macros">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="macro" type="macro" minOccurs="0" maxOccurs="32"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<!--	
+	<xsd:simpleType name="macro-id-syntax">
+		<xsd:restriction base="xsd:token">
+			<xsd:pattern value="$USER[1-9][0-9]?$=.*"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	//-->
+	
+	<xsd:complexType name="macro">
+		<xsd:element name="macro_value" type="xsd:token"/>
+		<xsd:attribute name="id" type="xsd:token"/>
+	</xsd:complexType> 
+</xsd:schema>
+	

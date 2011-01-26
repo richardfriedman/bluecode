@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>Blue Configuration Tool - Host Help</title>
+<link href="styles/blue_help.css" rel="stylesheet" type="text/css"/>
+</head>
+<body bgcolor="#F0F8FF">
+	<h3>Host Help</h3>
+	<p>This page allows you to define Host objects within your Blue monitoring configuration. A Host object should
+	be viewed as any physical device on your network. This obviously includes normal servers that provide services, but
+	also extends to include other devices such as switches, routers, temperature monitoring systems etc.</p>
+	<p>When defining a Host object, there are several required pieces of information. The information you must supply is as
+	follows:
+		<ul>
+			<li><b>Hostname</b> - The name of this Host</li>
+			<li><b>Alias</b> - An Alias for this Host</li>
+			<li><b>IP Address</b> - The IP Address that this Host can be reached on.</li>
+			<li><b>Max Check Attempts</b> - The number of times Blue will try to re-check this Host, should the check host Command not return OK.</li>
+			<li><b>Check Period</b> - The Time Period in which it is valid to make active checks of this host.</li>
+			<li><b>Notification Options</b> - This determines under what conditions notifications for this Host will be sent.</li>
+			<li><b>Notification Interval</b> - This determines the number of "time units" to wait before re-notifying a Contact that the Host is still down.</li>
+			<li><b>Notification Period</b> - This determines the Time Period in which it is valid to send Notifications.</li>
+			<li><b>Contact Groups</b> - This is the Contact Group that should be notified for this Host.</li>
+		</ul>
+	</p>
+	<p>Perhaps the other most important part of the Host configuration is selecting the Command to use for checking the Host. This Command will perform
+	some functionality that allows Blue to be sure that the Host is still up and responsive. Host Checks are only performed on start up and then after
+	any Service that runs on the Host returns a non-OK status. This is to verify that the Host is still responsive before notifications are sent for the
+	Service.</p>
+	<p>In order for checks to be completed and notifications to be sent, it is imperative that you have the 'Checks Enabled' option set and also
+	the 'Notifications Enabled' option. Without these options set, Blue will not perform any checking of the Host nor send any notifications should
+	the state of the Host change.</p>
+	<p>Should an event occur on this Host, you can define what is known as an Event Handler. In effect an Event Handler consists of a Command that should be
+	run after a certain event occurs. For instance you may wish to provide a command that sends Host monitoring information to a database after an event occurs.
+	To utilise an Event Handler, you must firstly define a Command that performs the required functionality you wish to implement should an Event occur, and then set this to
+	be the Event Handler for this Host. You must then ensure that the 'Event Handler Enabled' option is set.</p>
+	<p> 
+	<p>Other options available to you include storing the status data of this Host by ensuring that the 'Retain Status Data' options are ticked. You can also specify
+	thresholds for flapping on this Host. For a detailed explanation of flapping, please refer to the main Blue Documentation.</p> 
+</body>
+</html> 

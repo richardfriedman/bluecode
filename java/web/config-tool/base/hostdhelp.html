@@ -1,0 +1,24 @@
+<html>
+<head>
+<title>Blue Configuration Tool - Host Dependency Help</title>
+<link href="styles/blue_help.css" rel="stylesheet" type="text/css"/>
+</head>
+<body bgcolor="#F0F8FF">
+	<h3>Host Dependency Help</h3>
+	<p>This page allows you to define Host Dependency objects within your Blue monitoring configuration. Host Dependencies
+	are a way of suppressing notifcations and active checks of Hosts based on the status of another Host. When defining a Host
+	Dependency there are a number of different pieces of information that you need to provide:
+	
+		<ul>
+			<li><b>Dependent Host Name</b> - This is the name of the Host on which we are dependent..</li>
+			<li><b>Host Name</b> - The host that this dependency applies to.</li>
+		</ul>
+	
+	<p>You can also specify whether or not this Dependency inherits the dependencies of the Host it is dependent on. Using this option, should
+	any Hosts that the parent of this dependency is dependent on fail, then notifications and checks for this Host will also be supressed.</p>
+	<p>By providing the Execution and Notification failure criteria, you prescribe the conditions of the dependent Host that will cause checks and
+	notifications of the Host to be supressed.</p>
+	
+	<p>It should be noted that Host Escalations are an optional part of your monitoring setup.</p>	
+</body>
+</html> 

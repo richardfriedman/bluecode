@@ -1,0 +1,11 @@
+# BLUE Basic Configuration
+
+This directory includes a very basic initial configuration for your Blue monitoring setup. These configuration files can be used to gain an overview of how the Blue Monitoring framework works and the relationship between the different objects within the Blue universe.
+
+You can use this configuration as a base for building out your own monitoring solution. To use this configuration with Blue you should run
+
+$BLUE_HOME/startup.sh -s -n
+
+This will start both the Blue Server, the Blue Console and should you have it installed, the Blue Configuration Utility. The configuration Utility will be configured to automatically help you manage this configuration.
+
+For more information on this subject visit http://localhost:8080/welcometoblue once you have launched the Blue Console process.

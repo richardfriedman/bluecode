@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns="http://localhost:8080/blue-config/ns/hosts"
+	    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	    targetNamespace="http://localhost:8080/blue-config/ns/hosts">
+	
+	<xsd:include schemaLocation="http://localhost:8080/blue-config/ns/generic.xsd"/>    
+
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+			XML Schema for Host Definition within Blue Monitoring Framework.
+		</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:element name="hosts">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="host" type="host" minOccurs="1" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:complexType name="host">
+		<xsd:sequence>
+			<xsd:element name="use" type="xsd:token" minOccurs="0"/>
+			<xsd:element name="host_name" type="xsd:token"/>
+			<xsd:element name="alias" type="xsd:token"/>
+			<xsd:element name="address" type="xsd:token"/>
+			<xsd:element name="parent_list" type="token-list" minOccurs="0"/>
+			<xsd:element name="hostgroups" type="token-list" minOccurs="0"/>
+			<xsd:element name="checks_enabled" type="xsd:token" minOccurs="0"/>
+			<xsd:element name="check_command" type="xsd:token" minOccurs="0"/>
+			<xsd:element name="max_check_attempts" type="xsd:positiveInteger"/>
+			<xsd:element name="check_interval" type="xsd:positiveInteger" minOccurs="0"/>
+			<xsd:element name="active_checks_enabled" type="trueOrFalse" minOccurs="0"/>
+			<xsd:element name="passive_checks_enabled" type="trueOrFalse" minOccurs="0"/>
+			<xsd:element name="check_period" type="xsd:token"/>
+			<xsd:element name="obsess_over_host" type="trueOrFalse" minOccurs="0"/>
+			<xsd:element name="check_freshness" type="trueOrFalse" minOccurs="0"/>
+			<xsd:element name="freshness_threshold" type="xsd:positiveInteger"/>
+			<xsd:element name="event_handler" type="xsd:token" minOccurs="0"/>
+			<xsd:element name="event_handler_enabled" type="trueOrFalse" minOccurs="0"/>
+			<xsd:element name="low_flap_threshold" type="xsd:positiveInteger" minOccurs="0"/>
+			<xsd:element name="high_flap_threshold" type="xsd:positiveInteger" minOccurs="0"/>
+			<xsd:element name="flap_detection_enabled" type="trueOrFalse" minOccurs="0"/>
+			<xsd:element name="failure_prediction_enabled" type="trueOrFalse" minOccurs="0"/>
+			<xsd:element name="process_perf_data" type="trueOrFalse" minOccurs="0"/>
+			<xsd:element name="retain_status_information" type="trueOrFalse" minOccurs="0"/>
+			<xsd:element name="contact_groups" type="token-list"/>
+			<xsd:element name="notification_interval" type="xsd:positiveInteger" minOccurs="0"/>
+			<xsd:element name="notification_period" type="xsd:token"/>
+			<xsd:element name="notification_options" type="xsd:token"/>
+			<xsd:element name="notifications_enabled" type="trueOrFalse" minOccurs="0"/>
+			<xsd:element name="stalking_options" type="xsd:token" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:ID"/>
+	</xsd:complexType>
+</xsd:schema>

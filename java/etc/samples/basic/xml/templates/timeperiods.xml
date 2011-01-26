@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<timeperiods:timeperiods xmlns:timeperiods="http://luggage.atl.ncl.ac.uk/blue/timeperiods">
+  <timeperiods:timeperiod id="0">
+    <timeperiods:timeperiod_name>24 x 7</timeperiods:timeperiod_name>
+    <timeperiods:alias>All Day, Every Day.</timeperiods:alias>
+    <timeperiods:sunday>00:00-24:00</timeperiods:sunday>
+    <timeperiods:monday>00:00-24:00</timeperiods:monday>
+    <timeperiods:tuesday>00:00-24:00</timeperiods:tuesday>
+    <timeperiods:wednesday>00:00-24:00</timeperiods:wednesday>
+    <timeperiods:thursday>00:00-24:00</timeperiods:thursday>
+    <timeperiods:friday>00:00-24:00</timeperiods:friday>
+    <timeperiods:saturday>00:00-24:00</timeperiods:saturday>
+  </timeperiods:timeperiod>
+  <timeperiods:timeperiod id="1">
+    <timeperiods:timeperiod_name>Outside Office Hours (UK)</timeperiods:timeperiod_name>
+    <timeperiods:alias>Outside 9-5</timeperiods:alias>
+    <timeperiods:sunday>00:00-24:00</timeperiods:sunday>
+    <timeperiods:monday>00:00-09:00-17:00-24:00</timeperiods:monday>
+    <timeperiods:tuesday>00:00-09:00-17:00-24:00</timeperiods:tuesday>
+    <timeperiods:wednesday>00:00-09:00-00:00-24:00</timeperiods:wednesday>
+    <timeperiods:thursday>00:00-09:00-17:00-24:00</timeperiods:thursday>
+    <timeperiods:friday>00:00-09:00-17:00-24:00</timeperiods:friday>
+    <timeperiods:saturday>00:00-24:00</timeperiods:saturday>
+  </timeperiods:timeperiod>
+  <timeperiods:timeperiod id="2">
+    <timeperiods:timeperiod_name>9 - 5, 5 Days a Week</timeperiods:timeperiod_name>
+    <timeperiods:alias>9-5 Office Hours</timeperiods:alias>
+    <timeperiods:monday>09:00-17:00</timeperiods:monday>
+    <timeperiods:tuesday>09:00-17:00</timeperiods:tuesday>
+    <timeperiods:wednesday>09:00-17:00</timeperiods:wednesday>
+    <timeperiods:thursday>09:00-17:00</timeperiods:thursday>
+    <timeperiods:friday>09:00-17:00</timeperiods:friday>
+  </timeperiods:timeperiod>
+</timeperiods:timeperiods>
+

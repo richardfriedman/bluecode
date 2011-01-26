@@ -1,0 +1,42 @@
+<hmtl>
+<head>
+<title>Blue Support</title>
+<link href="styles/blue.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div id="content">
+<a href="index.html">Home</a>
+<h3>Blue Support</h3>
+
+<p>Some common errors with Blue:<br/>
+
+<ul>
+	<li>When attempting to run the java -jar command i receive the following error<br/><br/>
+	<b>java: command not found (*nix systems)</b><br/>
+
+	<b>java is not recognized as an internal or external command, operable program or batch file. (Windows systems)</b>
+
+<p>This is caused by the java executable not being on your path. For information onplacing the Java executable onto your path, please see the following links:
+<ul>
+	<li><a href="http://www.computerhope.com/issues/ch000549.htm">Windows Path Information</a></li>
+	<li><a href="http://kb.iu.edu/data/acar.html ">Unix Path Information</a></li>
+</ul>
+</p>
+</li>
+ 
+<li><b>When attempting to start the Blue Console I receive java.lang.ClassNotFoundException: org.mortbay.xml.XmlConfiguration.</b>
+<p>
+This is caused by the required libraries for Jetty not being on your Classpath. By default Jetty will check for the presence of these libraries within the ~lib directory relative to where the blue-console.jar is installed. To resolve the above issue you can perform one of the following:
+
+<ul>
+	<li> run the blue-console from within the console directory of $BLUE_HOME thus allowing Jetty to find the required .jar files from the ~lib directory</li>
+	<li> add the jetty.jar and jetty-utils.jar jar files to your classpath.</li>
+</ul>
+</p>
+</ul>
+
+<p>For further help visit the Blue website at http://blue.sourceforge.net.</p>
+<a href="index.html">Home</a>
+</div>
+</body>
+</html>

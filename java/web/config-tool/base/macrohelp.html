@@ -1,0 +1,24 @@
+<html>
+<head>
+<title>Blue Configuration Tool - Macro Help</title>
+<link href="styles/blue_help.css" rel="stylesheet" type="text/css"/>
+</head>
+<body bgcolor="#F0F8FF">
+	<h3>Macro Help</h3>
+	<p>This page allows you to define Macro objects within your Blue monitoring configuration. Macro objects should be seen as a way of providing a
+	shortcut to certain pieces of information, or hiding the value of information from the Blue Console. For instance, the most command macro value is
+	typically a path to the directory in which your plug-ins are defined. This means that instead of having to provide a full path to your plug-ins, you can
+	instead use the macro representation instead. When defining a macro you will need to provide the following information: 
+	
+		<ul>
+			<li><b>Macro Definition</b> - The value that should be assigned to this Macro.</li>
+		</ul>
+	
+	<p>As discussed Macros should be seen as a way of providing shortcuts and hiding sensitive information. In the example discussed above, your plug-ins
+	may typically lie within the /usr/local/blue/libexec directory. Rather than having to type out this full path every time you create a command definition,
+	it is easier to replace this value within a macro. So should macro 1 be assigned the value of /usr/local/blue/libexec, this can be accessed by using the
+	$USER1$ macro within the command definition i.e. $USER1$/check_ping.</p>
+	
+	<p>It should be noted that Blue supports a maximum of 32 user defined Macros.</p>
+</body>
+</html> 

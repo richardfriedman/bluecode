@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hostgroups:hostgroups xmlns:hostgroups="http://localhost:8080/blue-config/ns/hostgroups">
+  <hostgroups:hostgroup id="0">
+    <hostgroups:hostgroup_name>Blue Hosts</hostgroups:hostgroup_name>
+    <hostgroups:alias>Example Blue Host Group</hostgroups:alias>
+    <hostgroups:members>Localhost</hostgroups:members>
+  </hostgroups:hostgroup>
+</hostgroups:hostgroups>
+

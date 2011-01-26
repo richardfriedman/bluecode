@@ -1,0 +1,86 @@
+ 
+BUILD SYSTEM and PROJECT STRUCTURE
+ 
+------------------------------------ 
+Web Applications
+------------------------------------
+ web/[app]
+	 Within each web app the following structure is REQUIRED
+	  base/ -- all your files for your web application
+     lib/* -- files you need to package and COMPILE with
+     src/* -- source files to compile for the app 
+     web.xml -- configuration file - more detail and requirements on this later
+  
+-----------------------------------------
+Server Project 
+-----------------------------------------
+** Today there is only ONE, beware I will be changing in this future as we create more server projects.
+** Hence this structure may change in the future.
+ server
+     lib/ -- all library files needed. they will all be bunlded in dist and all used during compile
+     src/ -- src files
+
+----------------------------------------
+Plugins
+----------------------------------------
+ plugins/
+     lib/ -- libraries needed for plugins
+     src/ -- source for plugins
+
+----------------------------------------
+Shared Directories 
+----------------------------------------
+ bin/ -- shell script files
+ etc/ -- configuraiton files
+ license/ -- license files 
+ lib/ -- shared libraries
+
+----------------------------------------
+Composing and Building Web Apps
+----------------------------------------
+ Each web app should have a make-[app] target.
+ The target should if needed compile the files
+
+ Libraries to be packaged with the application should
+ be added ${webapps}/[application]/lib.
+
+ Libraries meant for the container and needed to build should be located
+ first at ${webapps}/lib and if shared with server or plugins be located
+ at ${lib}.
+
+ The compile path should be 
+ ${lib}/[list shared jars needed]
+ ${webapps}/lib/*.jar
+ ${webapps}/[app]/lib/*.jar
+ 
+ Currently the build system packages everything up with jetty, libraries
+ packaged with jetty should be ${webapps}/lib/*.jar and any specific ones 
+ needed from ${lib}/[specifiy]
+
+----------------------------------------
+Composing building plugins
+----------------------------------------
+** This will change/simplify at some point ;)
+ Plugin source is located at ${plugins}/src.  
+ Each plugin should currently add a section to the make-plugins target.
+ 
+ 		<jar destfile="${dist-plugins}/blue-check-[yourcheck].jar">
+			<manifest>
+				<attribute name="Class-Path" value="etc/ lib/blue-plugins.jar lib/xyz.jar" />
+				<attribute name="Main-class" value="org.blue.plugins.check_[yourcheck]" />
+			</manifest>
+		</jar>
+
+Notice the classpath settings.
+   etc/  -- this enables plugins to load stuff from config file. However, this is really only valid for 
+     		   blue deployments, and not generic nagios deployments
+   lib/blue-plugins.jar -- jar which contains all built plugins
+   lib/xyz.jar -- which every jar files from lib you might need
+
+---------------------------------
+Known Issues and Concerns
+---------------------------------
+1. Plugin description building is lame
+2. Sharing libraries is still annoying
+3. Maven not yet integrated
+

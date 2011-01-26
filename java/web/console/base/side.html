@@ -1,0 +1,295 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+
+<TITLE>Blue a Java Port of Nagios</TITLE>
+<STYLE type="text/css">
+
+<!--
+
+	TABLE.NavBarTitle { margin-left: 0; margin-bottom: 3; font-family: verdana,arial,serif;}
+	.Menu { }
+	
+	TD.NavBarTitle { border-style: solid; border-width: 1 ; border-color: #8CACBB; background-color white: color: #DEE7C6C; text-align:center; font-family: verdana,arial,serif;  font-size: 10pt; font-weight: bold; center; text-decoration: none; }
+	.NavBarItem { font-family: verdana,arial,serif; color: #DEE7C6; font-size: 8pt; font-weight: bold; text-decoration: none; }
+	.NavBarSearchItem { font-family: verdana,arial,serif; color: #DEE7C6; font-size: 8pt; }
+	
+	INPUT.NavBarSearchItem { font-family: verdana,arial,serif; background-color: white; color: black; font-size: 8pt; }
+	
+	BODY.navbar { font-family: verdana,arial,serif; background-color: #111166; color: white; }
+
+-->
+	
+</STYLE>
+
+<link rel="icon" href="images/blue.ico" type="image/ico">
+<link rel="shortcut icon" href="images/blue.ico" >
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+
+if(parseInt(navigator.appVersion.substring(0,1))>=3){
+  doton = new Image(13,14);
+  doton.src = "images/orangedot.gif";
+  dotoff = new Image(13,14);
+  dotoff.src = "images/bluedot.gif";
+  }
+
+function switchdot(name,on){
+  if(parseInt(navigator.appVersion.substring(0,1))>=3){
+    image = eval("" + (on == 1 ? "doton.src" : "dotoff.src"));
+    document[name].src=image;
+    }
+  }
+
+//-->
+</SCRIPT>
+
+</HEAD>
+
+<BODY CLASS='navbar'>
+<table  border="0" width="160" cellspacing="0" cellpadding="0">
+<tr valign="top"><td valign="top">
+<!----------------------------------  LOGO SECTION BEGIN ---------------------------->
+<table width="160" cellpadding="0" cellspacing="0" border="0">
+  <tr>
+    <td>
+      <div align="center"><a href="http://blue.sourceforge.net/" target="_blank"><img src="images/blue-logo.gif" height=85" width="165" border="0" alt="Blue"></a></div>
+    </td>
+  </tr>
+</table>
+<!----------------------------------  LOGO SECTION END ---------------------------->
+
+<!----------------------------------  GENERAL SECTION BEGIN ---------------------------->
+<table width="160" class="NavBarTitle" cellspacing="0">
+	<tr><td class="NavBarTitle">general</td></tr>
+</table>
+
+<table class="Menu" width="160" >
+  <tr> <!-- MAIN -->
+    <td width=13><img src="images/bluedot.gif" width="10" height="10" name="home-dot"></td>
+    <td nowrap width=134><a href="/welcome" target="main" onMouseOver="switchdot('home-dot',1)" onMouseOut="switchdot('home-dot',0)" class="NavBarItem">home</a></td>
+  </tr>
+  <tr> <!-- DOCUMENTATION -->
+    <td width=13><img src="images/bluedot.gif" width="10" height="10" name="documentation-dot"></td>
+    <td nowrap><a href="/welcome/bluecomponents.html" target="main" onMouseOver="switchdot('documentation-dot',1)" onMouseOut="switchdot('documentation-dot',0)" class="NavBarItem">getting started</a></td>
+  </tr>
+  <tr>
+  <tr>  <!-- NEW CONFIG TOOL -->
+    <td width=13><img src="images/bluedot.gif" width="10" height="10" name="new-config-tool-dot"></td>
+    <td nowrap width=134><a href="/blue-config" target="main" onMouseOver="switchdot('new-config-tool-dot',1)" onMouseOut="switchdot('new-config-tool-dot',0)" class="NavBarItem">New Config Tool</a></td>
+  </tr>
+  <tr>
+    <td colspan="2" height="6"></td>
+  </tr>
+</table>
+<!----------------------   GENERAL SECTION END ------------------------------------->
+
+<!----------------------   MONITORING SECTION BEGIN ------------------------------------->
+<table width="160" class="NavBarTitle" cellspacing="0">
+	<tr><td class="NavBarTitle">monitoring</td></tr>
+</table>
+
+<table class="Menu" width="160" >
+  <tr> <!-- TACTICAL OVERVIEW -->
+    <td width=13><img src="images/bluedot.gif" width="10" height="10" name="tac-dot"></td>
+    <td nowrap><a href="tac" target="main" onMouseOver="switchdot('tac-dot',1)" onMouseOut="switchdot('tac-dot',0)" class="NavBarItem">Tactical Overview</a></td>
+  </tr>
+  <tr> <!-- SERVICE DETAIL -->
+    <td width=13><img src="images/bluedot.gif" width="10" height="10" name="status-dot"></td>
+    <td nowrap><a href="status?host=all" target="main" onMouseOver="switchdot('status-dot',1)" onMouseOut="switchdot('status-dot',0)" class="NavBarItem">Service Detail</a></td>
+  </tr>
+  <tr> <!-- HOST DETAIL -->
+    <td width=13><img src="images/bluedot.gif" width="10" height="10" name="hoststatus-dot"></td>
+    <td nowrap><a href="status?hostgroup=all&style=hostdetail" target="main" onMouseOver="switchdot('hoststatus-dot',1)" onMouseOut="switchdot('hoststatus-dot',0)" class="NavBarItem">Host Detail</a></td>
+  </tr>
+  <tr> <!-- HOSTGROUP OVERVIEW -->
+    <td width=13><img src="images/bluedot.gif" width="10" height="10" name="hgstatus-dot"></td>
+    <td nowrap><a href="status?hostgroup=all&style=overview" target="main" onMouseOver="switchdot('hgstatus-dot',1)" onMouseOut="switchdot('hgstatus-dot',0)" class="NavBarItem">Host Group Overview</a></td>
+  </tr>
+  <tr> <!-- HOSTGROUP SUMMARY -->
+    <td width=13><img src="images/bluedot.gif" width="10" height="10" name="hgstatus2-dot"></td>
+    <td nowrap><a href="status?hostgroup=all&style=summary" target="main" onMouseOver="switchdot('hgstatus2-dot',1)" onMouseOut="switchdot('hgstatus2-dot',0)" class="NavBarItem">Host Group Summary</a></td>
+  </tr>
+  <tr> <!-- HOSTGROUP GRID -->
+    <td width=13><img src="images/bluedot.gif" width="10" height="10" name="hgstatus3-dot"></td>
+    <td nowrap><a href="status?hostgroup=all&style=grid" target="main" onMouseOver="switchdot('hgstatus3-dot',1)" onMouseOut="switchdot('hgstatus3-dot',0)" class="NavBarItem">Host Group Grid</a></td>
+  </tr>
+  <tr> <!-- SERVICEGROUP OVERVIEW -->
+    <td width=13><img src="images/bluedot.gif" width="10" height="10" name="sgstatus1-dot"></td>
+    <td nowrap><a href="status?servicegroup=all&style=overview" target="main" onMouseOver="switchdot('sgstatus1-dot',1)" onMouseOut="switchdot('sgstatus1-dot',0)" class="NavBarItem">Service Group Overview</a></td>
+  </tr>
+  <tr> <!-- SERVICEGROUP SUMMARY -->
+    <td width=13><img src="images/bluedot.gif" width="10" height="10" name="sgstatus2-dot"></td>
+    <td nowrap><a href="status?servicegroup=all&style=summary" target="main" onMouseOver="switchdot('sgstatus2-dot',1)" onMouseOut="switchdot('sgstatus2-dot',0)" class="NavBarItem">Service Group Summary</a></td>
+  </tr>
+  <tr> <!-- SERVICEGROUP GRID -->
+    <td width=13><img src="images/bluedot.gif" width="10" height="10" name="sgstatus3-dot"></td>
+    <td nowrap><a href="status?servicegroup=all&style=grid" target="main" onMouseOver="switchdot('sgstatus3-dot',1)" onMouseOut="switchdot('sgstatus3-dot',0)" class="NavBarItem">Service Group Grid</a></td>
+  </tr>
+  <tr> <!-- STATUSMAP -->
+    <td width=13><img src="images/bluedot.gif" width="10" height="10" name="statusmap-dot-dot"></td>
+    <td nowrap><a href="statusmap?host=all" target="main" onMouseOver="switchdot('statusmap-dot',1)" onMouseOut="switchdot('statusmap-dot',0)" class="NavBarItem">Status Map</a></td>
+  </tr>
+  <tr> <!-- 3-D STATUSMAP -->
+    <td width=13><img src="images/bluedot.gif" width="10" height="10" name="statuswrl-dot"></td>
+    <td nowrap><a href="statuswrl?host=all" target="main" onMouseOver="switchdot('statuswrl-dot',1)" onMouseOut="switchdot('statuswrl-dot',0)" class="NavBarItem">3-D Status Map</a></td>
+  </tr>
+  <tr>
+
+  <tr> 
+    <td colspan="2" height="6"></td>
+  </tr>
+
+  <tr> <!-- SERVICE PROBLEMS -->
+    <td width=13><img src="images/bluedot.gif" width="10" height="10" name="svcproblems-dot"></td>
+    <td nowrap><a href="status?host=all&servicestatustypes=28" target="main" onMouseOver="switchdot('svcproblems-dot',1)" onMouseOut="switchdot('svcproblems-dot',0)" class="NavBarItem">Service Problems</a></td>
+  </tr>
+
+  <tr> <!-- HOST PROBLEMS -->
+    <td width=13><img src="images/bluedot.gif" width="10" height="10" name="hostproblems-dot"></td>
+    <td nowrap><a href="status?hostgroup=all&style=hostdetail&hoststatustypes=12" target="main" onMouseOver="switchdot('hostproblems-dot',1)" onMouseOut="switchdot('hostproblems-dot',0)" class="NavBarItem">Host Problems</a></td>
+  </tr>
+
+  <tr> <!-- NETWORK OUTAGES -->
+    <td width=13><img src="images/bluedot.gif" width="10" height="10" name="outages-dot"></td>
+    <td nowrap><a href="outages" target="main" onMouseOver="switchdot('outages-dot',1)" onMouseOut="switchdot('outages-dot',0)" class="NavBarItem">Network Outages</a></td>
+  </tr>
+
+  <!-------   SEARCH BOX BEGIN ---------------->
+  <tr> 
+    <td colspan="2" height="6"></td>
+  </tr>
+  <tr> 
+    <td width=13></td>
+    <td nowrap class="NavBarSearchItem">Show Host:</td>
+  </tr>
+  <tr> 
+    <td width=13></td>
+    <td nowrap>
+    	<form action="status" method="get" id="searchform" target="main">
+			<input type='hidden' name='navbarsearch' value='1'>
+			<input type="text" value="" class="NavBarSearchItem" id="searchbox" size="15" name="host" tabindex="1" /> 
+	</form>
+    </td>
+  </tr>
+  	<!-------   SEARCH BOX END ---------------->
+
+  <tr> <!-- COMMENTS -->
+    <td width=13><img src="images/bluedot.gif" width="10" height="10" name="comment-dot"></td>
+    <td nowrap><a href="extinfo?type=3" target="main" onMouseOver="switchdot('comment-dot',1)" onMouseOut="switchdot('comment-dot',0)" class="NavBarItem">Comments</a></td>
+  </tr>
+
+  <tr> <!-- DOWNTIME -->
+    <td width=13><img src="images/bluedot.gif" width="10" height="10" name="downtime-dot"></td>
+    <td nowrap><a href="extinfo?type=6" target="main" onMouseOver="switchdot('downtime-dot',1)" onMouseOut="switchdot('downtime-dot',0)" class="NavBarItem">Downtime</a></td>
+  </tr>
+
+  <tr>
+    <td colspan="2" height="6"></td>
+  </tr>
+
+  <tr> <!-- PROCESS INFO -->
+    <td width=13><img src="images/bluedot.gif" width="10" height="10" name="processinfo-dot"></td>
+    <td nowrap><a href="extinfo?type=0" target="main" onMouseOver="switchdot('processinfo-dot',1)" onMouseOut="switchdot('processinfo-dot',0)" class="NavBarItem">Process Info</a></td>
+  </tr>
+
+  <tr> <!-- PERFORMANCE -->
+    <td width=13><img src="images/bluedot.gif" width="10" height="10" name="performance-dot"></td>
+    <td nowrap><a href="extinfo?type=4" target="main" onMouseOver="switchdot('performance-dot',1)" onMouseOut="switchdot('performance-dot',0)" class="NavBarItem">Performance Info</a></td>
+  </tr>
+
+  <tr> <!-- PERFORMANCE -->
+    <td width=13><img src="images/bluedot.gif" width="10" height="10" name="queue-dot"></td>
+    <td nowrap><a href="extinfo?type=7" target="main" onMouseOver="switchdot('queue-dot',1)" onMouseOut="switchdot('queue-dot',0)" class="NavBarItem">Scheduling Queue</a></td>
+  </tr>
+
+  <tr>
+    <td colspan="2" height="6"></td>
+  </tr>
+
+</table>
+
+<!----------------------   COMMUNITY SECTION END ------------------------------------->
+
+<!---------------------------------   CODE RELATED START ------------------------->
+
+<table class="NavBarTitle" width="160">
+	<tr>
+  	  <td class="NavBarTitle">reporting</td>
+	</tr>
+</table>
+
+<table class="Menu" width="160" >
+  <tr>  <!-- TRENDS -->
+    <td width=13><img src="images/bluedot.gif" width="10" height="10" name="trends-dot"></td>
+    <td nowrap width=134><a href="trends" target="main" onMouseOver="switchdot('trends-dot',1)" onMouseOut="switchdot('trends-dot',0)" class="NavBarItem">Trends</a></td>
+  </tr>
+  <tr>  <!-- AVAIL -->
+    <td width=13><img src="images/bluedot.gif" width="10" height="10" name="avail-dot"></td>
+    <td nowrap width=134><a href="avail" target="main" onMouseOver="switchdot('avail-dot',1)" onMouseOut="switchdot('avail-dot',0)" class="NavBarItem">Availability</a></td>
+  </tr>
+  <tr>  <!-- HISTOGRAM -->
+    <td width=13><img src="images/bluedot.gif" width="10" height="10" name="histogram-dot"></td>
+    <td nowrap width=134><a href="avail" target="main" onMouseOver="switchdot('histogram-dot',1)" onMouseOut="switchdot('histogram-dot',0)" class="NavBarItem">Alert Histogram</a></td>
+  </tr>
+  <tr>  <!-- HISTORY -->
+    <td width=13><img src="images/bluedot.gif" width="10" height="10" name="history-dot"></td>
+    <td nowrap width=134><a href="history?host=all" target="main" onMouseOver="switchdot('history-dot',1)" onMouseOut="switchdot('history-dot',0)" class="NavBarItem">Alert History</a></td>
+  </tr>
+  <tr>  <!-- SUMMARY -->
+    <td width=13><img src="images/bluedot.gif" width="10" height="10" name="summary-dot"></td>
+    <td nowrap width=134><a href="summary" target="main" onMouseOver="switchdot('summary-dot',1)" onMouseOut="switchdot('summary-dot',0)" class="NavBarItem">Alert Summary</a></td>
+  </tr>
+  <tr>  <!-- NOTIFICATIONS -->
+    <td width=13><img src="images/bluedot.gif" width="10" height="10" name="notifications-dot"></td>
+    <td nowrap width=134><a href="notifications?contact=all" target="main" onMouseOver="switchdot('notifications-dot',1)" onMouseOut="switchdot('notifications-dot',0)" class="NavBarItem">Notifications</a></td>
+  </tr>
+  <tr>  <!-- SHOW LOG -->
+    <td width=13><img src="images/bluedot.gif" width="10" height="10" name="logfile-dot"></td>
+    <td nowrap width=134><a href="showlog" target="main" onMouseOver="switchdot('logfile-dot',1)" onMouseOut="switchdot('logfile-dot',0)" class="NavBarItem">Event Log</a></td>
+  </tr>
+
+  <tr>
+    <td colspan="2" height="6"></td>
+  </tr>
+</table>
+<!---------------------------------   REPROTING END ------------------------->
+
+<!---------------------------------   CONFIGURATION START ------------------------->
+
+<table class="NavBarTitle" width="160">
+	<tr>
+  	  <td class="NavBarTitle">configuration</td>
+	</tr>
+</table>
+
+<table class="Menu" width="160" >
+  <tr>  <!-- CONFIG -->
+    <td width=13><img src="images/bluedot.gif" width="10" height="10" name="config-dot"></td>
+    <td nowrap width=134><a href="config" target="main" onMouseOver="switchdot('config-dot',1)" onMouseOut="switchdot('config-dot',0)" class="NavBarItem">View Config</a></td>
+  </tr>
+
+  <tr>  <!-- CONFIG TOOL -->
+    <td width=13><img src="images/bluedot.gif" width="10" height="10" name="config-tool-dot"></td>
+    <td nowrap width=134><a href="/blue-config" target="main" onMouseOver="switchdot('config-tool-dot',1)" onMouseOut="switchdot('config-tool-dot',0)" class="NavBarItem">New Config Tool</a></td>
+  </tr>
+
+  <tr>
+    <td colspan="2" height="6"></td>
+  </tr>
+</table>
+<!---------------------------------   CONFIGURATION END ------------------------->
+
+</td>
+<!--
+<td height="100%" width="6" ><img src="images/pixel.gif" WIDTH="6" HEIGHT="100%" ALT="" BORDER="0"></td>
+<td height="100%" width="2" background="images/bluedotv.gif"><img SRC="images/pixel.gif" WIDTH="2" HEIGHT="2" ALT="" BORDER="0"></td>
+-->
+</tr>
+</table>
+
+</BODY>
+</HTML>
+

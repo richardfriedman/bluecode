@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<macros:macros xmlns:macros="http://localhost:8080/blue-config/ns/macros">
+  <macros:macro macro_id="$USER1$">
+    <macros:macro_value>/usr/local/nagios/libexec</macros:macro_value>
+  </macros:macro>
+  <macros:macro macro_id="$USER2$">
+	<macros:macro_value>/usr/local/blue/plugins</macros:macro_value>
+  </macros:macro>
+</macros:macros>
+

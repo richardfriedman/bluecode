@@ -1,0 +1,29 @@
+<html>
+<head>
+<title>Blue Configuration Tool - Time Period Help</title>
+<link href="styles/blue_help.css" rel="stylesheet" type="text/css"/>
+</head>
+<body bgcolor="#F0F8FF">
+	<h3>Time Period Help</h3>
+	<p>This page allows you to define Time Period objects within your Blue monitoring configuration. A Time Period object can be viewed as a definition
+	of a period of time in which it is legal to perform Service and Host checks and send notifications. </p>
+	
+	<p>When defining a Time Period object, there are two required pieces of information. The information you must supply is as
+	follows:
+		<ul>
+			<li><b>Time Period Name</b> - The name of this Time Period.</li>
+			<li><b>Alias</b> - The alias of this Time Period.</li>
+		</ul>
+	</p>
+	<p>There are two valid syntaxes for definining a Time Period. As shown on the Time Period form, there is a begin and end period for each 
+	day of the week. Each of these periods can be addressed in the following ways:
+		<ul>
+			<li><b>Begin:</b>09:00  <b>End</b>17:00</li>
+			<li><b>Begin:</b>09:00-12:00  <b>End</b>15:00-20:00</li>
+		</ul>
+	</p>
+	<p>In the first example, the Time Period is valid from 09:00 through to 17:00 without any breaks. In the second example, the Time Period is valid from
+	09:00 until 12:00, and then from 15:00 until 20:00. This technique can be applied to each day of the week to create highly customised Time Periods. Should
+	you not wish to have a valid Time on a certain day of the week, simply exclude that day from the Time Period definition.</p>
+</body>
+</html> 

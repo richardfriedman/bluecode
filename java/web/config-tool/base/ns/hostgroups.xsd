@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns="http://localhost:8080/blue-config/ns/hostgroups"
+	    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	    targetNamespace="http://localhost:8080/blue-config/ns/hostgroups">
+	
+	<xsd:include schemaLocation="http://localhost:8080/blue-config/ns/generic.xsd"/>
+	    
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+			XML Schema for HostGroup Definition within Blue Monitoring Framework.
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:element name="host_groups">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="host_group" type="host-group" minOccurs="1" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:complexType name="host-group">
+		<xsd:sequence>
+			<xsd:element name="hostgroup_name" type="xsd:token"/>
+			<xsd:element name="alias" type="xsd:token"/>
+			<xsd:element name="members" type="token-list"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:ID"/>
+	</xsd:complexType>
+</xsd:schema>

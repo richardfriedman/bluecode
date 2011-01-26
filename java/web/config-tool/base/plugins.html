@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>BLUE:: Open Source System and Network Monitoring</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link href="styles/blue.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div id="content"><img src="images/bluebanner.jpg" />
+
+
+<div id="nav"><b class="rtop"><b class="r1"></b> <b class="r2"></b> <b class="r3"></b> <b class="r4"></b></b>
+
+<ul>
+<li><h5>Main Config</h5></li>
+<li><a href="index.html">Home</a></li>
+<li><a href="main.html">Main Configuration</a></li>
+<li><a href="macros.html">Macro Definitions</a></li>
+<li><a href="plugins.html">Plugin Management</a></li><br/>
+<li><h5>Object Config</h5></li>
+<li><a href="hosts.html">Host Configuration</a></li>
+<li><a href="groups.html">Host Group Configuration</a></li>
+<li><a href="services.html">Service Config</a></li>
+<li><a href="groups.html">Service Group Config</a></li>
+<li><a href="contacts.html">Contact Config</a></li>
+<li><a href="groups.html">Contact Group Config</a></li>
+<li><a href="timeperiods.html">Timeperiod Config</a></li>
+<li><a href="commands.html">Command Config</a></li>
+<li><a href="serviced.html">Service Dependency Config</a></li>
+<li><a href="servicee.html">Service Escalation Config</a></li>
+<li><a href="hostd.html">Host Dependency Config</a></li>
+<li><a href="hoste.html">Host Escalation Config</a></li>
+<li><a href="hostexi.html">Host Ext Info Config</a><li>
+<li><a href="serviceexi.html">Service Ext Info Config</a><li>
+</ul>
+
+
+
+<b class="rbottom"><b class="r4"></b> <b class="r3"></b> <b class="r2"></b> <b class="r1"></b></b></div>
+
+
+
+<div id="main">
+
+<div class="contentbox"><b class="rtop"><b class="r1"></b> <b class="r2"></b> <b class="r3"></b> <b class="r4"></b></b>
+<h3>Plugin Management</h3>
+<p>
+	Blue Plugins are the scripts and binaries that provide the ability to monitor a variety of different services and hosts. This
+	page helps to manage the plugins that are installed as part of your Blue configuration. Here you can create new services and hosts
+	based around the plugins that you already have installed. You can also search for and install new plugins from the central repository. Finally you can
+	give back to the Blue community by uploading any plugins that you have written yourself that you believe others may find useful.	
+</p>
+<b class="rbottom"><b class="r4"></b> <b class="r3"></b> <b class="r2"></b> <b class="r1"></b></b></div>
+
+<div class="contentbox"><b class="rtop"><b class="r1"></b> <b class="r2"></b> <b class="r3"></b> <b class="r4"></b></b>
+<h3>Search for Plugins:</h3><p>
+Use the form below to search through the plugins available in our central repository:
+</p>
+<p>
+<table>
+	<form name="plugin_search" action="" method="">
+	<tr><td>Search Term:</td><td><input type="text" size="20" name="search_string"></td></tr>
+	<tr><td colspan="2"><input type="submit" value="Search"/> <input type="reset" value="Clear"/></td></tr>
+	</form>
+</table>
+	
+</p>
+<b class="rbottom"><b class="r4"></b> <b class="r3"></b> <b class="r2"></b> <b class="r1"></b></b></div>
+
+<div class="contentbox"><b class="rtop"><b class="r1"></b> <b class="r2"></b> <b class="r3"></b> <b class="r4"></b></b>
+<h3>Current Plugins:</h3>
+<p>
+	<table name="plugin_info" width="600">
+	<tr><td>Plugin Name:</td><td>Date Installed:</td><td>New Host</td><td>New Service</td></tr>
+	<tr><td>Ping Check:</td><td>20/02/06</td><td><a href="#">Create New Host</a></td><td><a href="#">Create New Service</a></td></tr>
+	<tr><td>POP_check:</td><td>20/02/06</td><td><a href="#">Create New Host</a></td><td><a href="#">Create New Service</a></td></tr>
+	<tr><td>IMAP_check:</td><td>20/02/06</td><td><a href="#">Create New Host</a></td><td><a href="#">Create New Service</a></td></tr>
+	<tr><td>TGRID_check:</td><td>20/02/06</td><td><a href="#">Create New Host</a></td><td><a href="#">Create New Service</a></td></tr>
+	</table>
+</p>
+<p>Pages: <a href="#">1</a> <a href="#">2</a> <a href="#">3</a> ... <a href="#">last</a>
+</p>
+<b class="rbottom"><b class="r4"></b> <b class="r3"></b> <b class="r2"></b> <b class="r1"></b></b></div>
+
+
+<div class="contentbox"><b class="rtop"><b class="r1"></b> <b class="r2"></b> <b class="r3"></b> <b class="r4"></b></b>
+<h3>Upload Plugin:</h3>
+<p>
+Developed a plugin and want to share it? Use the form below to upload your plugin to the main Blue repository. Once approved it will be available
+to all Blue users.
+</p>
+<p>
+	<table name="plugin_info" width="600">
+	<form name="plugin_uploader" action="" method="post" enctype="multipart/form-data">
+	<tr><td>Plugin Binary/Script:</td><td><input type="file" name="plugin_file" size="20"/></td><td></td></tr>
+	<tr><td>Plugin Manifest:</td><td><input type="file" name="plugin_manifest" size="20"/></td><td><a href="#" align="left"> (Whats This?)</a></td></tr>
+	<tr><td><input type="submit" value="Upload"/> <input type="reset" value="Clear"/></td></tr>
+	</form>
+	</table>
+</p>
+<b class="rbottom"><b class="r4"></b> <b class="r3"></b> <b class="r2"></b> <b class="r1"></b></b></div>
+
+
+</div>
+</div>
+</body>
+</html>

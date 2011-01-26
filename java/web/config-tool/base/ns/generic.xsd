@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns="http://localhost:8080/blue-config/ns/generic"
+	    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	    targetNamespace="http://localhost:8080/blue-config/ns/generic">
+	    
+	    <xsd:annotation>
+		<xsd:documentation xml:lang="en">
+			XML Schema for Generic Type Definition within Blue Monitoring Framework XML Schemas.
+		</xsd:documentation>
+	    </xsd:annotation>
+	    
+	    <xsd:complexType name="token-list">
+		<xsd:sequence>
+			<xsd:element name="entry" type="xsd:token" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	    </xsd:complexType>
+	    
+	    <xsd:simpleType name="trueOrFalse">
+		<xsd:restriction base="xsd:boolean">
+			<xsd:pattern value="0"/>
+			<xsd:pattern value="1"/>
+		</xsd:restriction>
+	    </xsd:simpleType>
+	    
+	    <xsd:simpleType name="validImage">
+		<xsd:restriction base="xsd:token">
+			<xsd:pattern value=".*(.png|.jpg|.gif)"/>
+		</xsd:restriction>
+	    </xsd:simpleType>
+	    
+	    <xsd:simpleType name="validURL">
+		<xsd:restriction base="xsd:token">
+			<xsd:pattern value="http://.*"/>
+		</xsd:restriction>
+	    </xsd:simpleType>
+		    
+	    <xsd:complexType name="twod_coords">
+		<xsd:sequence>
+			<xsd:element name="x_coord" type="xsd:nonNegativeInteger"/>
+			<xsd:element name="y_coord" type="xsd:nonNegativeInteger"/>
+		</xsd:sequence>
+	    </xsd:complexType>
+	
+	    <xsd:complexType name="threed_coords">
+		<xsd:sequence>
+			<xsd:element name="x_coord" type="xsd:double"/>
+			<xsd:element name="y_coord" type="xsd:double"/>
+			<xsd:element name="z_coord" type="xsd:double"/>
+		</xsd:sequence>
+	    </xsd:complexType>
+
+</xsd:schema>

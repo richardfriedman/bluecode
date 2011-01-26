@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns="http://localhost:8080/blue-config/ns/contactgroups"
+	    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	    targetNamespace="http://localhost:8080/blue-config/ns/contactgroups">
+	
+	<xsd:include schemaLocation="http://localhost:8080/blue-config/ns/generic.xsd"/>
+	    
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+			XML Schema for ContactGroup Definition within Blue Monitoring Framework.
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:element name="contact_groups">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="contact_group" type="contact-group" minOccurs="1" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:complexType name="contact-group">
+		<xsd:sequence>
+			<xsd:element name="contactgroup_name" type="xsd:token"/>
+			<xsd:element name="alias" type="xsd:token"/>
+			<xsd:element name="members" type="token-list"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:ID"/>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<commands:commands xmlns:commands="http://localhost:8080/blue-config/ns/commands">
+  <commands:command id="0">
+    <commands:command_name>check_ping</commands:command_name>
+    <commands:command_line>java -jar $USER2$/blue-check-ping -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$ -p 5</commands:command_line>
+  </commands:command>
+  <commands:command id="1">
+    <commands:command_name>check_local_load</commands:command_name>
+    <commands:command_line>$USER1$/check_load -w $ARG1$ -c $ARG2$</commands:command_line>
+  </commands:command>
+  <commands:command id="2">
+    <commands:command_name>check-host-alive</commands:command_name>
+    <commands:command_line>java -jar $USER2$/blue-check-ping -H $HOSTADDRESS$ -w 3000.0,80% -c 5000.0,100% -p 1</commands:command_line>
+  </commands:command>
+  <commands:command id="3">
+    <commands:command_name>check_local_disk</commands:command_name>
+    <commands:command_line>$USER1$/check_disk -w $ARG1$ -c $ARG2$ -p $ARG3$</commands:command_line>
+  </commands:command>
+  <commands:command id="4">
+    <commands:command_name>email_contact</commands:command_name>
+    <commands:command_line>echo "Emailing your Blue Contact!"</commands:command_line>
+  </commands:command>
+  <commands:command id="5">
+    <commands:command_name>global_event_handler</commands:command_name>
+    <commands:command_line>echo "A Global Event Has Occurred"</commands:command_line>
+  </commands:command>
+  <commands:command id="6">
+  	<commands:command_name>check_local_time</commands:command_name>
+  	<commands:command_line>java -jar $USER2$/blue-check-local-time.jar -H $ARG1$ -w $ARG2$ -c $ARG3$</commands:command_line>
+  </commands:command>
+  <commands:command id="7">
+  	<commands:command_name>check_ftp</commands:command_name>
+  	<commands:command_line>java -jar $USER2$/blue-check-ftp.jar -H $ARG1$ -d $ARG2$ -f $ARG3$ -u $ARG4$ -p $ARG5$</commands:command_line>
+  </commands:command>
+</commands:commands>
+

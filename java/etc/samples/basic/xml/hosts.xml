@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hosts:hosts xmlns:hosts="http://localhost:8080/blue-config/ns/hosts">
+  <hosts:host id="0">
+    <hosts:host_name>Localhost</hosts:host_name>
+    <hosts:alias>Example Monitoring Host</hosts:alias>
+    <hosts:address>127.0.0.1</hosts:address>
+    <hosts:check_command>check-host-alive</hosts:check_command>
+    <hosts:max_check_attempts>5</hosts:max_check_attempts>
+    <hosts:check_interval>30</hosts:check_interval>
+    <hosts:checks_enabled>1</hosts:checks_enabled>
+    <hosts:active_checks_enabled>1</hosts:active_checks_enabled>
+    <hosts:passive_checks_enabled>1</hosts:passive_checks_enabled>
+    <hosts:check_period>24 x 7</hosts:check_period>
+    <hosts:obsess_over_host>0</hosts:obsess_over_host>
+    <hosts:check_freshness>0</hosts:check_freshness>
+    <hosts:freshness_threshold>0</hosts:freshness_threshold>
+    <hosts:event_handler>global_event_handler</hosts:event_handler>
+    <hosts:event_handler_enabled>0</hosts:event_handler_enabled>
+    <hosts:low_flap_threshold>0</hosts:low_flap_threshold>
+    <hosts:high_flap_threshold>0</hosts:high_flap_threshold>
+    <hosts:flap_detection_enabled>0</hosts:flap_detection_enabled>
+    <hosts:failure_prediction_enabled>1</hosts:failure_prediction_enabled>
+    <hosts:process_perf_data>0</hosts:process_perf_data>
+    <hosts:retain_status_information>1</hosts:retain_status_information>
+    <hosts:retain_nonstatus_information>1</hosts:retain_nonstatus_information>
+    <hosts:contact_groups>Blue_Contacts</hosts:contact_groups>
+    <hosts:notification_interval>30</hosts:notification_interval>
+    <hosts:notification_period>24 x 7</hosts:notification_period>
+    <hosts:notification_options>d,u</hosts:notification_options>
+    <hosts:notifications_enabled>1</hosts:notifications_enabled>
+  </hosts:host>
+</hosts:hosts>
+

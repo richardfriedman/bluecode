@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns="http://http://localhost:8080/blue-config/ns/contacts"
+	    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	    targetNamespace="http://localhost:8080/blue-config/ns/contacts">
+	
+	<xsd:include schemaLocation="http://localhost:8080/blue-config/ns/generic.xsd"/>
+	    
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+			XML Schema for Contact Definition within Blue Monitoring Framework.
+		</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:element name="contacts">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="contact" type="contact" minOccurs="1" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:complexType name="contact">
+		<xsd:sequence>
+			<xsd:element name="contact_name" type="xsd:token"/>
+			<xsd:element name="alias" type="xsd:token"/>
+			<xsd:element name="contactgroups" type="token-list" minOccurs="0"/>
+			<xsd:element name="host_notification_period" type="xsd:token"/>
+			<xsd:element name="service_notification_period" type="xsd:token"/>
+			<xsd:element name="host_notification_options" type="host-notification-list"/>
+			<xsd:element name="service_notification_options" type="service-notification-list"/>
+			<xsd:element name="host_notification_commands" type="token-list" minOccurs="0"/>
+			<xsd:element name="service_notification_commands" type="token-list" minOccurs="0"/>
+			<xsd:element name="email" type="xsd:token" minOccurs="0"/>
+			<xsd:element name="pager" type="xsd:token" minOccurs="0"/>
+			<xsd:element name="addresses" type="token-list"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:ID"/>
+	</xsd:complexType>
+	
+	<xsd:simpleType name="service-notifications">
+		<xsd:restriction base="xsd:token">
+			<xsd:pattern value="w"/>
+			<xsd:pattern value="u"/>
+			<xsd:pattern value="c"/>
+			<xsd:pattern value="r"/>
+			<xsd:pattern value="f"/>
+			<xsd:pattern value="n"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="host-notificatons">
+		<xsd:restriction base="xsd:token">
+			<xsd:pattern value="d"/>
+			<xsd:pattern value="u"/>
+			<xsd:pattern value="r"/>
+			<xsd:pattern value="f"/>
+			<xsd:pattern value="n"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="host-notification-list">
+		<xsd:sequence>
+			<xsd:element name="entry" type="host-notifications" minOccurs="1" maxOccurs="6"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="service-notification-list">
+		<xsd:sequence>
+			<xsd:element name="entry" type="service-notifications" minOccurs="1" maxOccurs="5"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+</xsd:schema>

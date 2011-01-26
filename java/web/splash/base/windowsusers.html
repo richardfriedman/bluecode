@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>Blue - Information for Windows Users</title>
+<link href="styles/blue.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div id="content">
+<a href="index.html">Home</a><br/>
+<h3>Information For Windows Users</h3>
+<p>This page contains useful information for Windows users. Nagios was designed to be run mostly within the Unix environment. Blue is different as it can be run natively on the Windows
+environment. This does however pose some problems to Windows users who wish to make the most of their
+Blue experience.</p>
+<p>The majority of problems for Windows users relate to the compilation of existing Nagios plugins. Plugins perform information gathering for the Blue/Nagios framework and allow the framework to make
+notification decisions based around the returned state of a Service. Without plugins the Nagios/Blue framework is
+not able to monitor any Services or Hosts.</p>
+<p>We are working hard to port as many of the Nagios plugins into Java as possible, but this will obviously take some
+time. Before a large number of the plugins have been ported into Java, it is likely that you will require the use
+of the current Nagios plugins to complete your monitoring experience. In order to utilise the plugins, they must be
+compiled for the machine on which you intend to use them. As the plugins can only be compiled using UNIX based processes,
+it presents a problem for many of you Windows users.</p>
+
+<p><b>Compiling Nagios Plugins for Windows</b><br/>
+It is possible to compile the Nagios plugins for Windows to some degree. In order to do this you will require two components:
+
+<ul>
+	<li>The latest Nagios Plugin bundle available from <a href="http://sourceforge.net/project/showfiles.php?group_id=29880" title="Latest Nagios Plugins">here</a></li>
+	<li>A copy of Cygwin. Cygwin is available <a href="http://www.cygwin.com" title="Cygwin">here</a>. Please follow the instructions at the site on how to Download and install Cygwin</li>
+</ul>
+
+You must make sure that you have the GCC C compiler for Cygwin installed as well as the make utility. The setup process for Cygwin is fairly
+intuitive and allows you to select the packages you wish to have installed from a predetermined list.</p>
+
+<p>Once you have the Cygwin installed you can now begin the process of compiling the Nagios plugins. Firstly untar the download package to a suitable location.
+Enter the newly created directory and run the following commands:
+
+	<ul>
+		<li><b>./configure</b> - This should complete without any errors</li>
+		<li><b>make -i</b> - The -i flag tells the make utility to ignore any errors and carry on.
+		<li><b>make -i install</b> - Again the -i flag instructs the make utility to ignore errors and carry on.
+		this will install the Nagios plugins into /usr/local/nagios/libexec.</li>
+	</ul>
+
+You can see which plugins have been successfully installed for your Windows environment by changing to the 
+/usr/local/nagios/libexec within Cygwin.</p>
+
+<p>With the plugins compiled and installed you can use them as you would with Nagios in a Unix environment.
+To do this we recommend using a macro to store the location of your plugins. To do this either use the configuration
+tool to add a macro with the value of the plugins location (under Cygwin on Windows this is typically c:\cygwin\usr\local\nagios\libexec).
+or edit your resource.cfg by hand to add the above macro information.</p>
+
+<p>We also have available a Java version of the check_nt plugin. This provides you with the ability to check certain aspects of the Windows
+environment. For more information on how to use the check_nt plugin, please refer to the plugin specific documentation (available by running 
+java -jar blue-check-nt -h from the command line).
+<a href="index.html">Home</a>
+</div>
+</body>
+</html>

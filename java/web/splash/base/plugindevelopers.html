@@ -1,0 +1,61 @@
+<html>
+<head>
+<link href="styles/blue.css" rel="stylesheet" type="text/css">
+<title>Blue Java Plugin Development.</title>
+</head>
+<body>
+<div id="content">
+<a href="index.html">Home</a>
+<h3>Plugin Development</h3>
+<p>This page gives information on how to develop plugins for Blue. Plugins are the small executables that
+allow Blue to run checks on different Hosts and Services. We have provided an initial amount of Blue Java
+plugins that have attempted to be faithful ports of their Nagios counterparts. The advantage of Java plugins
+over their Nagios counterparts is that they can be run on any system with Java installed, and they do not need
+to be compiled for your individual system.</p>
+<p>As discussed we have provided a basic complement of plugins that have been ported from their C counterparts (and more are to follow). However
+you may wish to write your own plugins to increase the functionality of your Blue experience. The following instructions 
+tell you how to do this</p>
+
+<p>Contained within the ~lib directory of your Blue installation is blue-plugins.jar. This contains all
+code for currently available Blue plugins. This .jar file also contains the base code that you will need
+to begin developing your own plugins.</p>
+
+<p>All Blue plugins extend the org.blue.plugins.check_base class. The check_base class is an abstract class meaning that it 
+cannot be directly instantiated. You will need to provide a concrete implementation of the abstract methods 
+that this class provides, all of which should be contained within the body of your plugin class.</p>
+
+<p>There are several different abstract methods from the check_base class that you must override. The below list
+provides definitions of the methods that you need to override and gives you an indication as to their basic operation.
+
+<ul>
+	<li><b>init_command()</b> - This allows you to prime the superclass with information about your plugin. The information you
+	can pass to the super class includes elements such as super.progname and super.revision,super.copyright.</li><br/>
+	<li><b>add_command_arguments(Options options)</b> - This is where you define the available parameters to your plugin. This method
+	makes use of the Apache Commons CLI library and provides access to super.options . super.options is a collection of options
+	added by default via the org.blue.plugins.check_base class, this includes default options that should appear with each plugin
+	i.e. -h for help, -v for verbose.</li><br/>
+	<li><b>process_command_option(Option o)</b> - This allows you to process the value of the option set by the user and configure your
+	plugin accordingly.</li><br/>
+	<li><b>process_command_arguments(String[] args)</b> - This allows you to process any command line values that were not caught by the 
+	process_command_option method.</li><br/>
+	<li><b>validate_command_arguments()</b> - This is where you sanity check the arguments that the user has passed. If there are incorrect
+	options set for your plugin to work correctly, then this method should return false.</li><br/>
+	<li><b>execute_check()</b> - This is the method in which you either have all the functionality that performs the check provided by your
+	plugin, or you call other methods to provide the functionality for you.</li><br/>
+	<li><b>check_message()</b> - This method is where you return the output of your plugin. This should be no more than one line of text.</li><br/>
+	<li><b>check_state()</b> - This method is where you return the status of your plugin. This should either be common_h.OK,common_h.WARNING,
+	common_h.CRITICAL or common_h.UNKNOWN based around the logic within your plugin.</li><br/>
+</ul>
+
+<p>Each plugin should also contain a single main method. Within this main method the plugin calls an instance of itself
+to perform the checks i.e.:<br/><br/>
+
+public static void main(String[] args)
+{
+	new check_ftp().process_request(args);
+}
+</p>
+<a href="index.html">Home</a>
+</div>
+</body>
+</html>

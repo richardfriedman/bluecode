@@ -1,0 +1,24 @@
+<html>
+<head>
+<title>Blue Configuration Tool - Command Help</title>
+<link href="styles/blue_help.css" rel="stylesheet" type="text/css"/>
+</head>
+<body bgcolor="#F0F8FF">
+	<h3>Command Help</h3>
+	<p>This page allows you to define Command objects within your Blue monitoring configuration. A Command object is, as the name would
+	suggest, a way of defining a Command that should be run to carry out certain actions such as checking the status of a Service/Host, running
+	a program to notify a Contact, performing some action to move status information into a database.</p>
+	
+	<p>When defining a Command object, there are two required pieces of information. The information you must supply is as
+	follows:
+		<ul>
+			<li><b>Command Name</b> - The name of this Contact.</li>
+			<li><b>Command Line</b> - The command line that should be executed by Blue. All paths are specifc to the system on which Blue is installed.</li>
+		</ul>
+	</p>
+	<p>Command definition often includes the use of Macros. Macros are a sanitized way of accessing data from the Blue framework. For instance you will
+	often see command definitions with $ARG1$, $ARG2$ within the Command Line attribute. This is so that the command can be used ubiquitously between
+	different Services and not be hardcoded. The $ARG1$ Macro will be filled with the Command line arguments from the Service definition. For more information
+	on Macros and their functionality, please consult the main Blue documentation.</p>
+</body>
+</html> 

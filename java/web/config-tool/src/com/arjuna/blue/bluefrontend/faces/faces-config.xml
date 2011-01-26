@@ -1,0 +1,657 @@
+<faces-config>
+	
+	<!-- Host Bean and HostHandler //-->
+	<managed-bean>
+		<managed-bean-name>host</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.Host</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>modifyHost</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.Host</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>hostHandler</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.HostHandler</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<managed-property>
+			<property-name>host</property-name>
+			<value>#{host}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>modifyHost</property-name>
+			<value>#{modifyHost}</value>
+		</managed-property>
+	</managed-bean>
+	
+	<!-- Group Bean and Group Handlers //-->
+	
+	<managed-bean>
+		<managed-bean-name>hostGroup</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.Group</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>serviceGroup</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.Group</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>contactGroup</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.Group</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>modifyGroup</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.Group</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+		
+	<managed-bean>
+		<managed-bean-name>groupHandler</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.GroupHandler</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<managed-property>
+			<property-name>hostGroup</property-name>
+			<value>#{hostGroup}</value>
+		</managed-property>
+	
+		<managed-property>
+			<property-name>contactGroup</property-name>
+			<value>#{contactGroup}</value>
+		</managed-property>
+	
+		<managed-property>
+			<property-name>serviceGroup</property-name>
+			<value>#{serviceGroup}</value>
+		</managed-property>
+		
+		<managed-property>
+			<property-name>modifyGroup</property-name>
+			<value>#{modifyGroup}</value>
+		</managed-property>
+	</managed-bean>
+	
+	
+	<!-- Contact bean and ContactHandler //-->
+	
+	<managed-bean>
+		<managed-bean-name>contact</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.Contact</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>contactHandler</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.ContactHandler</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<managed-property>
+			<property-name>contact</property-name>
+			<value>#{contact}</value>
+		</managed-property>
+	</managed-bean>
+	
+	<!-- Service bean and ServiceHandler //-->
+	<managed-bean>
+		<managed-bean-name>service</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.Service</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>modifyService</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.Service</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>serviceHandler</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.ServiceHandler</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<managed-property>
+			<property-name>service</property-name>
+			<value>#{service}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>modifyService</property-name>
+			<value>#{modifyService}</value> 
+		</managed-property>
+	</managed-bean>
+	
+	<!-- TimePeriod bean and TimePeriodHandler //-->
+	<managed-bean>
+		<managed-bean-name>timePeriod</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.TimePeriod</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>modifyTimePeriod</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.TimePeriod</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>timePeriodHandler</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.TimePeriodHandler</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<managed-property>
+			<property-name>timePeriod</property-name>
+			<value>#{timePeriod}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>modifyTimePeriod</property-name>
+			<value>#{modifyTimePeriod}</value>
+		</managed-property>
+	</managed-bean>
+	
+	<!-- Command bean and CommandHandler //-->
+	<managed-bean>
+		<managed-bean-name>command</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.Command</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>modifyCommand</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.Command</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>commandHandler</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.CommandHandler</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<managed-property>
+			<property-name>command</property-name>
+			<value>#{command}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>modifyCommand</property-name>
+			<value>#{modifyCommand}</value>
+		</managed-property>
+	</managed-bean>
+	
+	<!-- Host Escalation Bean, ServiceEscalationBean and EscalationHandler //-->
+	
+	<managed-bean>
+		<managed-bean-name>hostEscalation</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.HostEscalation</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>modifyHostEscalation</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.HostEscalation</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>serviceEscalation</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.ServiceEscalation</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>modifyServiceEscalation</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.ServiceEscalation</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>escalationHandler</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.EscalationHandler</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<managed-property>
+			<property-name>hostEscalation</property-name>
+			<value>#{hostEscalation}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>modifyHostEscalation</property-name>
+			<value>#{modifyHostEscalation}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>serviceEscalation</property-name>
+			<value>#{serviceEscalation}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>modifyServiceEscalation</property-name>
+			<value>#{modifyServiceEscalation}</value>
+		</managed-property>
+		
+	</managed-bean>
+	
+	<!-- Service,Host Dependency bean and DependencyHandler //-->
+	<managed-bean>
+		<managed-bean-name>serviceDependency</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.ServiceDependency</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>	
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>modifyServiceDependency</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.ServiceDependency</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>hostDependency</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.HostDependency</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>	
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>modifyHostDependency</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.HostDependency</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>dependencyHandler</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.DependencyHandler</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<managed-property>
+			<property-name>hostDependency</property-name>
+			<value>#{hostDependency}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>modifyHostDependency</property-name>
+			<value>#{modifyHostDependency}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>serviceDependency</property-name>
+			<value>#{serviceDependency}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>modifyServiceDependency</property-name>
+			<value>#{modifyServiceDependency}</value>
+		</managed-property>
+	</managed-bean>
+	
+	<!-- ServiceExtInfo, HostExtInfo bean and ExtInfoHandler //-->
+	<managed-bean>
+		<managed-bean-name>serviceExtInfo</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.ServiceExtInfo</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>modifyServiceExtInfo</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.ServiceExtInfo</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>hostExtInfo</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.HostExtInfo</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>modifyHostExtInfo</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.HostExtInfo</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>extInfoHandler</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.ExtInfoHandler</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<managed-property>
+			<property-name>serviceExtInfo</property-name>
+			<value>#{serviceExtInfo}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>modifyServiceExtInfo</property-name>
+			<value>#{modifyServiceExtInfo}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>hostExtInfo</property-name>
+			<value>#{hostExtInfo}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>modifyHostExtInfo</property-name>
+			<value>#{modifyHostExtInfo}</value>
+		</managed-property>
+	</managed-bean>
+	
+	
+	<!-- Search handling ! //-->
+	<managed-bean>
+		<managed-bean-name>searchHandler</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.SearchHandler</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>accountHandler</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.AccountHandler</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>blueConfig</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.BlueConfig</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>blueConfigHandler</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.BlueConfigHandler</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<managed-property>
+			<property-name>blueConfig</property-name>
+			<value>#{blueConfig}</value>
+		</managed-property>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>macro</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.Macro</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>macroHandler</managed-bean-name>
+		<managed-bean-class>com.arjuna.blue.bluefrontend.faces.MacroHandler</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<managed-property>
+			<property-name>macro</property-name>
+			<value>#{macro}</value>
+		</managed-property>
+	</managed-bean>
+		
+	
+	<!-- Navigation rule for Searching //-->
+	<navigation-rule>
+		<navigation-case>
+			<from-action>#{searchHandler.searchObjects}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/search.faces</to-view-id>
+			<redirect/>
+		</navigation-case>
+				
+		<navigation-case>
+			<from-outcome>add-success</from-outcome>
+			<to-view-id>/addsuccess.jsp</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>delete-success</from-outcome>
+			<to-view-id>/deletesuccess.jsp</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>modify-success</from-outcome>
+			<to-view-id>/modifysuccess.jsp</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>success-add-1</from-outcome>
+			<to-view-id>/blueconfig2.faces</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>next-page-1</from-outcome>
+			<to-view-id>/blueconfig2.faces</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>success-add-2</from-outcome>
+			<to-view-id>/blueconfig3.faces</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>next-page-2</from-outcome>
+			<to-view-id>/blueconfig3.faces</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>success-add-3</from-outcome>
+			<to-view-id>/blueconfig4.faces</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>next-page-3</from-outcome>
+			<to-view-id>/blueconfig4.faces</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>success-add-4</from-outcome>
+			<to-view-id>/addconfig.jsp</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>select-group</from-outcome>
+			<to-view-id>/modifygroup.jsp</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>select-host</from-outcome>
+			<to-view-id>/modifyhost.jsp</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>select-command</from-outcome>
+			<to-view-id>/modifycommand.jsp</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>select-contact</from-outcome>
+			<to-view-id>/modifycontact.jsp</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>select-timeperiod</from-outcome>
+			<to-view-id>/modifytimeperiod.jsp</to-view-id>
+			<redirect/>
+		</navigation-case>		
+		
+		<navigation-case>
+			<from-outcome>select-service</from-outcome>
+			<to-view-id>/modifyservice.jsp</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>select-hostexti</from-outcome>
+			<to-view-id>/modifyhostexti.jsp</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>select-serviceexti</from-outcome>
+			<to-view-id>/modifyserviceexti.jsp</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>select-hostdependency</from-outcome>
+			<to-view-id>/modifyhostd.jsp</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>select-servicedependency</from-outcome>
+			<to-view-id>/modifyserviced.jsp</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>select-serviceescalation</from-outcome>
+			<to-view-id>/modifyservicee.jsp</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>select-hostescalation</from-outcome>
+			<to-view-id>/modifyhoste.jsp</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<!-- Wizard Navigation Rules! //-->
+
+		<navigation-case>
+			<from-action>#{accountHandler.beginWizard}</from-action>
+			<from-outcome>wizard-begin</from-outcome>
+			<to-view-id>/macros.faces</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-action>#{macroHandler.addMacro}</from-action>
+			<from-outcome>wizard-macro-add</from-outcome>
+			<to-view-id>/commands.faces</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-action>#{blueConfigHandler.saveResult}</from-action>
+			<from-outcome>wizard-config-add</from-outcome>
+			<to-view-id>/timeperiods.faces</to-view-id>
+			<redirect/>
+		</navigation-case>
+	
+		<navigation-case>
+			<from-action>#{commandHandler.addCommand}</from-action>
+			<from-outcome>wizard-command-add</from-outcome>
+			<to-view-id>/blueconfig.faces</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-action>#{commandHandler.addCommand}</from-action>
+			<from-outcome>wizard-command</from-outcome>
+			<to-view-id>/commands.faces</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-action>#{timePeriodHandler.addTimePeriod}</from-action>
+			<from-outcome>wizard-timeperiod-add</from-outcome>
+			<to-view-id>/contacts.faces</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-action>#{contactHandler.addContact}</from-action>
+			<from-outcome>wizard-contact-add</from-outcome>
+			<to-view-id>/contactgroups.faces</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-action>#{groupHandler.addResult}</from-action>
+			<from-outcome>wizard-contactgroup-add</from-outcome>
+			<to-view-id>/hosts.faces</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-action>#{hostHandler.addHost}</from-action>
+			<from-outcome>wizard-host-add</from-outcome>
+			<to-view-id>/hostgroups.faces</to-view-id>		
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-action>#{groupHandler.addResult}</from-action>
+			<from-outcome>wizard-hostgroup-add</from-outcome>
+			<to-view-id>/services.faces</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-action>#{escalationHandler.addResult}</from-action>
+			<from-outcome>wizard-serviceescalation-add</from-outcome>
+			<to-view-id>/serviced.faces</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-action>#{serviceHandler.addService}</from-action>
+			<from-outcome>wizard-service-add</from-outcome>
+			<to-view-id>/servicegroups.faces</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-action>#{groupHandler.addResult}</from-action>
+			<from-outcome>wizard-servicegroup-add</from-outcome>
+			<to-view-id>/servicee.faces</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-action>#{escalationHandler.addResult}</from-action>
+			<from-outcome>wizard-serviceescalation-add</from-outcome>
+			<to-view-id>/serviced.faces</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-action>#{dependencyHandler.addResult}</from-action>
+			<from-outcome>wizard-servicedependency-add</from-outcome>
+			<to-view-id>/serviceexti.faces</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>proceed</from-outcome>
+			<to-view-id>/serviced.faces</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>proceed-2</from-outcome>
+			<to-view-id>/serviceexti.faces</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>finish</from-outcome>
+			<to-view-id>/index.faces</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-action>#{extInfoHandler.addResult}</from-action>
+			<from-outcome>wizard-serviceextinfo-add</from-outcome>
+			<to-view-id>/index.faces</to-view-id>
+		<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-action>#{accountHandler.importConfig}</from-action>
+			<from-outcome>parsing-error</from-outcome>
+			<to-view-id>/importerror.jsp</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-action>#{accountHandler.importConfig}</from-action>
+			<from-outcome>parsing-success</from-outcome>
+			<to-view-id>/importsuccess.jsp</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+	
+</faces-config>

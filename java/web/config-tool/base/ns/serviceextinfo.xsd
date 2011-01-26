@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns="http://localhost:8080/blue-config/ns/serviceextinfo"
+	    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	    targetNamespace="http://localhost:8080/blue-config/ns/serviceextinfo">
+	
+	<xsd:include schemaLocation="http://localhost:8080/blue-config/ns/generic.xsd"/>
+	    
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+			XML Schema for ServiceExtInfo Definition within Blue Monitoring Framework.
+		</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:element name="service_extended_infos">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="serviceextinfo" type="service-ext-info" minOccurs="1" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:complexType name="service-ext-info">
+		<xsd:sequence>
+			<xsd:element name="host_name" type="xsd:token"/>
+			<xsd:element name="service_description" type="xsd:token"/>
+			<xsd:element name="notes" type="xsd:token" minOccurs="0"/>
+			<xsd:element name="notes_url" type="validURL" minOccurs="0"/>
+			<xsd:element name="action_url" type="validURL" minOccurs="0"/>
+			<xsd:element name="icon_image" type="validImage" minOccurs="0"/>
+			<xsd:element name="icon_image_alt" type="xsd:token" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:ID"/>
+	</xsd:complexType>
+
+</xsd:schema>

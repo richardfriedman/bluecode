@@ -1,0 +1,502 @@
+<project name="blue" default="dist" basedir=".">
+	<description>
+        Project Blue Build File.  Blue Server. Blue Console. Blue Plugins. Blue Agent.
+    </description>
+
+	<!-- set global properties for this build -->
+	<property name="author" 		value="Richard Friedman richardfriedman@yahoo.com" />
+	<property name="major.minor" 	value="0.8" />
+	<property name="release" 		value="1" />
+	<property name="version" 		value="${major.minor}.${release}" />
+
+	<!-- transient -->
+	<property name="build" 	location="build" />
+	<property name="dist" 	location="dist" />
+
+	<!-- root directories for components -->
+	<property name="server"  location="java/server" />
+	<property name="registry" location="java/registry"/>
+	<property name="webapps" location="java/web" />
+	<property name="plugins" location="java/plugins" />
+
+	<!-- shared directories, but should they be? -->
+	<property name="lib" 		location="java/lib" />
+	<property name="cfg" 		location="java/etc" />
+	<property name="licenses" 	location="java/license" />
+	<property name="bin" 		location="java/bin" />
+
+	<!-- distribution locations -->
+	<property name="dist-server" location="${dist}/server" />
+	<property name="dist-registry" location="${dist}/registry"/>
+	<property name="dist-agent" location="${dist}/agent"/>
+	<property name="dist-plugins" location="${dist}/plugins" />
+	<property name="dist-web" location="${dist}/webapps" />
+	<property name="dist-webapps" location="${dist-web}/webapps" />
+	<property name="dist-javadocs" location="${dist}/javadocs" />
+	<property name="dist-blue*salesforce" location="${dist}/blue-star-salesforce" />
+
+	<!--************  INIT ***********-->
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp />
+		<mkdir dir="${build}/server" />
+		<mkdir dir="${build}/registry"/>
+		<mkdir dir="${build}/plugins" />
+		<mkdir dir="${build}/webapps" />
+
+		<mkdir dir="${dist-server}" />
+		<mkdir dir="${dist-registry}"/>
+		<mkdir dir="${dist-plugins}" />
+		<mkdir dir="${dist-webapps}" />
+		<mkdir dir="${dist-agent}"/>
+
+	</target>
+
+	<!-- ************  DIST BLUE SERVER ************ -->
+	<target name="make-server" description="Build the Blue Server distribution" depends="init">
+
+		<!-- Compile the java code from ${src} into ${build} -->
+		<javac debug="true" srcdir="${server}/src" destdir="${build}/server">
+			<classpath>
+				<fileset dir="${lib}" includes="*.jar" />
+				<fileset dir="${server}/lib" includes="*.jar" />
+			</classpath>
+		</javac>
+
+		<!-- CREATE DISTRIBUTION -->
+		<!-- Put everything in ${build}/server into the blue-server.jar file -->
+		<jar destfile="${dist-server}/blue-server.jar">
+			<fileset dir="${build}/server" includes="**/**" />
+			<manifest>
+				<attribute name="Built-By" value="${author}" />
+				<attribute name="Class-Path" value="etc/ lib/commons-cli-1.0.jar lib/log4j-1.2.13.jar blue-console.jar" />
+				<attribute name="Main-class" value="org.blue.star.base.blue" />
+				<section name="common">
+					<attribute name="Implementation-Title" value="Blue Server" />
+					<attribute name="Implementation-Versio" value="${version} ${TODAY}" />
+					<attribute name="Implementation-Vendor" value="${author}" />
+				</section>
+			</manifest>
+		</jar>
+
+		<!-- JARS Needed For Classpath : CLI and LOGGING -->
+		<copy todir="${dist-server}/lib">
+			<fileset dir="${lib}" includes="commons-cli-1.0.jar" />
+			<fileset dir="${lib}" includes="log4j-1.2.13.jar" />
+		</copy>
+
+		<!-- BIN DIRECTORY  -->
+		<copy todir="${dist-server}/bin">
+			<fileset dir="${bin}" includes="*.*" />
+		</copy>
+
+		<!-- Create ETC directory -->
+		<copy todir="${dist-server}/etc">
+			<fileset dir="${cfg}/" includes="**/**" excludes="jetty.xml realm.properties" />
+		</copy>
+
+		<!-- NEED empty directory to start with -->
+		<mkdir dir="${dist-server}/var/rw" />
+
+	</target>
+
+	<!-- Make a webapps based JETTY distribution -->
+	<target name="make-webapps" description="make the distribution work with jetty" depends="init">
+
+		<!-- Start JAR for JETTY -->
+		<copy file="${lib}/start-6.1.2rc1.jar" tofile="${dist-web}/blue-console.jar" />
+
+		<!-- JETTY default looks for ./lib/*.jar -->
+		<copy todir="${dist-web}/lib">
+			<fileset dir="${lib}" includes="commons-cli-1.0.jar" />
+			<fileset dir="${lib}" includes="log4j-1.2.13.jar" />
+			<fileset dir="${webapps}/lib" includes="*.jar" />
+		</copy>
+
+		<!-- JETTY default looks for ./etc/jetty.xml and ./etc/realm.properties-->
+		<copy file="${cfg}/jetty.xml" todir="${dist-web}/etc" />
+		<copy file="${cfg}/realm.properties" todir="${dist-web}/etc" />
+
+		<!-- BIN DIRECTORY  -->
+		<copy todir="${dist-web}/bin">
+			<fileset dir="${bin}" includes="*.*" />
+		</copy>
+
+	</target>
+
+	<!-- ************  MAKE BLUE CONSOLE (blue.war) ************ -->
+	<target name="make-console" description="Build the Blue Console distribution" depends="init">
+
+		<!-- 1. BUILD -->
+		<mkdir dir="${build}/console" />
+
+		<!-- Compile the java code from ${src} into ${build} -->
+		<javac debug="true" srcdir="${webapps}/console/src" destdir="${build}/console">
+			<classpath id="console.compile.path">
+				<pathelement path="${dist-server}/blue-server.jar" />
+				<fileset dir="${lib}" includes="*.jar" />
+				<fileset dir="${webapps}/lib" includes="*.jar" />
+				<!-- fileset dir="${webapps}/console/lib/" includes="*.jar" / -->
+			</classpath>
+		</javac>
+
+		<!-- 2. CREATE DISTRIBUTION -->
+		<!-- The Blue Console is packaged as a common war. -->
+		<war warfile="false" destfile="${dist-webapps}/blue.war" webxml="${webapps}/console/web.xml" basedir="${webapps}/console/base">
+			<lib file="${dist-server}/blue-server.jar" />
+			<lib dir="${webapps}/console/lib/" />
+			<classes dir="${build}/console" />
+			<classes file="${cfg}/log4j.properties" />
+		</war>
+
+	</target>
+
+	<!-- Make the splash screen web app -->
+	<target name="make-splash" description="Build the splash web application" depends="init">
+		<war destfile="${dist-webapps}/welcome.war" webxml="${webapps}/splash/web.xml" basedir="${webapps}/splash/base" includes="**/**" />
+	</target>
+
+	<!-- ************  MAKE BLUE CONSOLE (blue.war) ************ -->
+	<target name="make-configtool" description="Build the blue configuration tool" depends="init">
+
+		<!-- 1. BUILD -->
+		<mkdir dir="${build}/config-tool" />
+
+		<!-- Compile the java code from ${src} into ${build} -->
+		<javac debug="true" srcdir="${webapps}/config-tool/src" destdir="${build}/config-tool">
+			<classpath>
+				<fileset dir="${lib}" includes="*.jar" />
+				<fileset dir="${webapps}/lib" includes="*.jar" />
+				<fileset dir="${webapps}/config-tool/lib/" includes="*.jar" />
+			</classpath>
+		</javac>
+
+		<!-- 2. CREATE DISTRIBUTION -->
+		<war destfile="${dist-webapps}/blue-config.war" webxml="${webapps}/config-tool/web.xml" basedir="${webapps}/config-tool/base">
+			<lib dir="${webapps}/config-tool/lib/" />
+			<classes dir="${build}/config-tool" />
+		</war>
+
+	</target>
+
+	<!-- ************  MAKE SALESFORCE.COM CONSOLE (blue-star-salesforce.war) ************ -->
+	<target name="make-blue*salesforce" description="Build the blue for salesforce tool" depends="init">
+
+		<!-- 1. BUILD -->
+		<mkdir dir="${build}/blue-star-salesforce" />
+
+		<!-- Compile the java code from ${src} into ${build} -->
+		<javac debug="true" srcdir="${webapps}/blue-star-salesforce/src" destdir="${build}/blue-star-salesforce">
+			<classpath>
+				<pathelement path="${dist-server}/blue-server.jar" />
+				<fileset dir="${lib}" includes="*.jar" />
+				<fileset dir="${webapps}/lib" includes="*.jar" />
+				<fileset dir="${webapps}/blue-star-salesforce/lib" includes="*.jar" />
+			</classpath>
+		</javac>
+
+		<!-- 2. CREATE WEB APPLICATION -->
+		<war destfile="${dist-webapps}/blue-star-salesforce.war" webxml="${webapps}/blue-star-salesforce/base/WEB-INF/web.xml" basedir="${webapps}/blue-star-salesforce/base">
+			<!-- lib dir="${webapps}/blue-star-salesforce/lib/" /-->
+			<lib file="${dist-server}/blue-server.jar" />
+			<classes dir="${build}/blue-star-salesforce" />
+			<excludesfile name="${webapps}/blue-star-salesforce/base/WEB-INF/web.xml" />
+		</war>
+
+	</target>
+
+	<!-- Macro to create plugin jars, simplifies make-plugins -->
+	<macrodef name="make-plugin-jar">
+		<attribute name="jar-file"/>
+		<attribute name="jar-class-path"/>
+		<attribute name="jar-main-class"/>
+		<sequential>
+			<jar destfile="${dist-plugins}/@{jar-file}" update="true" >
+				<manifest>
+					<attribute name="Class-Path" value="etc/ lib/commons-cli-1.0.jar lib/log4j-1.2.13.jar lib/blue-plugins.jar @{jar-class-path}" />
+					<attribute name="Main-class" value="@{jar-main-class}" />
+				</manifest>
+			</jar>
+			<java fork="true" jar="${dist-plugins}/@{jar-file}" dir="${dist-plugins}" resultproperty="ignore" output="${dist-plugins}/docs/@{jar-main-class}.txt">
+				<arg value="-h" />
+			</java>
+		</sequential>
+	</macrodef>
+
+	<!-- ************  DIST BLUE PLUGINS ************ -->
+	<target name="make-plugins" description="Build the Blue Plugin Distribution" depends="init,make-registry" >
+
+		<!-- Compile the java code from ${src} into ${build} -->
+		<mkdir dir="${build}/plugins" />
+		<javac debug="true" srcdir="${plugins}/src" destdir="${build}/plugins">
+			<classpath>
+				<fileset dir="${lib}" includes="*.jar" />
+				<fileset dir="${plugins}/lib" includes="*.jar" />
+				<fileset dir="${dist-registry}" includes="blue-registry.jar"/>
+				<fileset dir="${registry}/lib" includes="*.jar"/>
+			</classpath>
+		</javac>
+
+		<!-- Put all plugins into the blue-plugins.jar file -->
+		<mkdir dir="${dist-plugins}/lib" />
+		<jar destfile="${dist-plugins}/lib/blue-plugins.jar">
+			<fileset dir="${build}/plugins" includes="**/**" />
+			<manifest>
+				<attribute name="Built-By" value="Richard Friedman akuns@sourceforge.net" />
+				<section name="common">
+					<attribute name="Implementation-Title" value="Blue Plugins" />
+					<attribute name="Implementation-Version" value="${version} ${TODAY}" />
+					<attribute name="Implementation-Vendor" value="Richard Friedman" />
+				</section>
+			</manifest>
+		</jar>
+
+		<!-- JARS Needed For Classpath : CLI and LOGGING -->
+		<copy todir="${dist-plugins}/lib">
+			<fileset dir="${plugins}/lib" includes="*.jar" excludes="sigar.jar,bcel*.jar" />
+			<fileset dir="${lib}" includes="commons-cli-1.0.jar" />
+			<fileset dir="${lib}" includes="log4j-1.2.13.jar" />
+		</copy>
+
+		<!-- EACH PLUGIN SHOULD GET ONE LINE -->
+		<mkdir dir="${dist-plugins}/docs" />
+		<make-plugin-jar jar-file="blue-check-ping.jar" jar-main-class="org.blue.star.plugins.check_ping" jar-class-path="" />
+		<make-plugin-jar jar-file="blue-send-mail.jar" jar-main-class="org.blue.star.plugins.send_mail" jar-class-path="lib/mail.jar lib/activation.jar" />
+		<make-plugin-jar jar-file="blue-check-ftp.jar" jar-main-class="org.blue.star.plugins.check_ftp" jar-class-path="lib/commons-net-1.4.1.jar" />
+		<make-plugin-jar jar-file="blue-check-http.jar" jar-main-class="org.blue.star.plugins.check_http" jar-class-path="lib/commons-httpclient-3.0.1.jar lib/commons-net-1.4.1.jar" />
+		<make-plugin-jar jar-file="blue-check-local-time.jar" jar-main-class="org.blue.star.plugins.check_local_time" jar-class-path="lib/commons-net-1.4.1.jar" />
+		<make-plugin-jar jar-file="blue-check-nt.jar" jar-main-class="org.blue.star.plugins.check_nt" jar-class-path="" />
+		<make-plugin-jar jar-file="blue-check-jmx.jar" jar-main-class="org.blue.star.plugins.check_jmx" jar-class-path="lib/jbossclient-all.jar" />
+		<make-plugin-jar jar-file="blue-check-salesforce-schema.jar" jar-main-class="org.blue.star.plugins.check_salesforce_schema" jar-class-path="lib/activation.jar lib/axis.jar lib/commons-discovery-0.2.jar lib/commons-httpclient-3.0.1.jar lib/commons-net-1.4.1.jar lib/jaxrpc.jar lib/jxydiff.jar lib/saaj.jar lib/sforce80.jar lib/wsdl4j-1.5.1.jar" />
+		<make-plugin-jar jar-file="blue-check-remote.jar" jar-main-class="org.blue.star.plugins.check_remote" jar-class-path="lib/jboss-common.jar lib/jboss-remoting.jar lib/concurrent.jar lib/log4j.jar blue-server.jar blue-registry.jar"/>
+
+	</target>
+
+	<!-- Target to build our Agent Distribution -->
+	<target name="make-agent" depends="make-registry">
+		
+		<!-- Build the agent .jar //-->
+		<jar destfile="${dist-agent}/blue-agent.jar">
+			<fileset dir="${build}/registry" includes="org/blue/star/registry/messaging/**"/>
+			<fileset dir="${build}/registry" includes="org/blue/star/registry/agent/**/**"/>
+			<manifest>
+				<attribute name="Built-By" value="Rob.Blake@arjuna.com"/>
+				<attribute name="Main-class" value="org.blue.star.registry.agent.BlueAgent"/>
+				<attribute name="Class-Path" value="etc/ lib/jboss-remoting.jar lib/jboss-common.jar lib/concurrent.jar lib/log4j-1.2.13.jar lib/jboss-jmx.jar lib/commons-cli-1.0.jar"/>
+					<section name="common">
+						<attribute name="Implementation-Title" value="Blue Agent" />
+						<attribute name="Implementation-Version" value="${version} ${TODAY}" />
+						<attribute name="Implementation-Vendor" value="Rob.Blake@arjuna.com" />
+					</section>
+			</manifest>
+		</jar>
+		
+		<!-- The required libraries for our agent -->
+		<mkdir dir="${dist-agent}/lib"/>
+		
+		<!-- Copy in the librarys used by our agent -->
+		<copy todir="${dist-agent}/lib">
+			<fileset dir="${registry}/lib" includes="jboss-remoting.jar"/>
+			<fileset dir="${lib}" includes="jboss-common.jar"/>
+			<fileset dir="${lib}" includes="concurrent.jar"/>
+			<fileset dir="${lib}" includes="log4j-1.2.13.jar"/>
+			<fileset dir="${lib}" includes="dom4j.jar"/>
+			<fileset dir="${lib}" includes="jboss-jmx.jar"/>
+			<fileset dir="${lib}" includes="commons-cli-1.0.jar"/>
+		</copy>
+		
+		<mkdir dir="${dist-agent}/etc"/>
+		
+		<!-- Copy in log4j.props for Agent -->
+		<copy todir="${dist-agent}/etc">
+			<fileset dir="${registry}/etc" includes="log4j.properties"/>
+		</copy>
+			
+		<!-- zip agent for distribution --> 
+		<zip destfile ="${dist-agent}/blue-agent.zip" duplicate="preserve">
+			<zipfileset file="${dist-agent}/blue-agent.jar" prefix="blue-agent"/>
+			<zipfileset dir="${dist-agent}/lib" prefix="blue-agent/lib"/>
+			<zipfileset dir="${dist-agent}/etc" prefix="blue-agent/etc"/>
+		</zip>
+		
+		<!-- .tar.gz agent for distribution -->
+		<tar destfile="${dist-agent}/blue-agent.tar.gz" compression="gzip">
+			<tarfileset file="${dist-agent}/blue-agent.zip" prefix="blue-agent"/>
+		</tar>
+	</target>
+	
+	
+	<!-- Target that builds the current Registry code & creates a Blue Agent Distribution //-->
+	<target name="make-registry" depends="make-server" description="Generate an initial Blue Agent">
+
+		<!-- Compile the Registry & Agent Code //-->
+		<javac debug="true" srcdir="${registry}/src" destdir="${build}/registry">
+			<classpath>
+				<fileset dir="${lib}" includes="*.jar"/>
+				<fileset dir="${registry}/lib" includes="*.jar"/>
+				<fileset dir="${dist-server}/" includes="blue-server.jar"/>
+			</classpath>
+		</javac>
+
+		<!-- Build the registry .jar //-->
+		<jar destfile="${dist-registry}/blue-registry.jar">
+			<fileset dir="${build}/registry" includes="org/blue/star/registry/*.class"/>
+			<fileset dir="${build}/registry" includes="org/blue/star/registry/messaging/**"/>
+			<manifest>
+				<attribute name="Built-By" value="Rob.Blake@arjuna.com"/>
+				<attribute name="Main-class" value="org.blue.star.registry.RegistryControl"/>
+				<attribute name="Class-Path" value="lib/jboss-remoting.jar lib/jboss-common.jar lib/concurrent.jar lib/log4j-1.2.13.jar lib/log4j.jar blue-server.jar"/>
+				<section name="common">
+					<attribute name="Implementation-Title" value="Blue Registry"/>
+					<attribute name="Implementation-Version" value="${version} ${TODAY}"/>
+					<attribute name="Implementation-Vendor" value="Rob.Blake@arjuna.com"/>
+				</section>
+			</manifest>
+		</jar>
+		
+		<!-- Copy required .jar files for Registry -->
+		<copy todir="${dist-server}/lib">
+			<fileset dir="${registry}/lib" includes="*jboss-remoting.jar" />
+		</copy>
+	</target>
+
+	<!-- ****** CREATE A SOURCE DISTRIBUTION for plugins and blue ***** -->
+	<target name="dist-source" depends="init">
+
+		<tar destfile="${dist}/blue-${version}.src.tar.gz" compression="gzip">
+			<tarfileset dir="java" includes="**/**" prefix="java" />
+			<tarfileset dir="." includes="build.xml" />
+		</tar>
+
+	</target>
+
+	<!-- ************  DIST ************ -->
+	<!-- A Blue*Salesforce distribution is comprised of (1) webapp structure (2) server (3) select plugins (4) select webapps -->
+	<target name="dist-blue*salesforce" depends="make-server,make-plugins,make-webapps,make-console,make-splash,make-blue*salesforce" >
+
+		<copy file="java/README.txt" todir="${dist-blue*salesforce}"/>
+		<copy file="java/VERSION.txt" todir="${dist-blue*salesforce}"/>
+		<copy todir="${dist-blue*salesforce}/licenses">
+			<fileset dir="${licenses}"/>
+		</copy>
+		
+		<!-- Server Project Files -->
+		<copy file="${dist-server}/blue-server.jar" todir="${dist-blue*salesforce}" />
+		<copy todir="${dist-blue*salesforce}/lib">
+			<fileset dir="${dist-server}/lib"/>
+		</copy>
+		
+		<!-- Web Project Files -->
+		<copy file="${dist-web}/blue-console.jar" todir="${dist-blue*salesforce}" />
+		<copy todir="${dist-blue*salesforce}/lib">
+			<fileset dir="${dist-web}/lib"/>
+		</copy>
+		<copy file="${dist-webapps}/blue.war" todir="${dist-blue*salesforce}/webapps" />
+		<copy file="${dist-webapps}/welcome.war" todir="${dist-blue*salesforce}/webapps" />
+		<copy file="${dist-webapps}/blue-star-salesforce.war" todir="${dist-blue*salesforce}/webapps" />
+
+		<!-- Plugins -->
+		<copy todir="${dist-blue*salesforce}">
+			<fileset dir="${dist-plugins}"/>
+		</copy>
+			
+		<!-- Build ETC directory -->
+		<copy todir="${dist-blue*salesforce}/etc">
+			<fileset dir="${webapps}/blue-star-salesforce/etc"/>
+		</copy>
+		
+	</target>
+
+	<target name="clean-blue*salesforce">
+		<delete dir="${dist}/blue-star-salesforce" />
+	</target>
+
+	<target name="dist" depends="make-server,make-registry,make-agent,make-plugins,make-webapps" description="Generate the distribution packaged up.">
+
+		<zip destfile="${dist}/blue-${version}.zip" duplicate="preserve">
+			<zipfileset file="java/README.txt" prefix="blue" />
+			<zipfileset file="java/VERSION.txt" prefix="blue" />
+			<zipfileset dir="${licenses}" prefix="blue/licenses" />
+			<zipfileset dir="${dist-server}" prefix="blue" />
+			<zipfileset dir="${dist-web}" prefix="blue" />
+			<zipfileset dir="${dist-plugins}" prefix="blue" />
+			<zipfileset dir="${dist-registry}" prefix="blue"/>
+		</zip>
+
+		<tar destfile="${dist}/blue-${version}.tar.gz" compression="gzip">
+			<zipfileset src="${dist}/blue-${version}.zip" />
+		</tar>
+
+	</target>
+
+	<target name="dist-plugins" depends="make-plugins" description="Make the blue-plugins RPM and tar distributions">
+
+		<!-- distribution of plugins -->
+		<tar destfile="${dist}/nagios-blue-plugins-${major.minor}-${release}.tar.gz" compression="gzip">
+			<zipfileset dir="${dist-plugins}" prefix="plugins" />
+		</tar>
+
+		<!-- building RPM -->
+		<mkdir dir="${build}/rpm/RPMS" />
+		<mkdir dir="${build}/rpm/SPECS" />
+		<mkdir dir="${build}/rpm/SOURCES" />
+		<mkdir dir="${build}/rpm/BUILD" />
+		<mkdir dir="${build}/rpm/SRPMS" />
+		<mkdir dir="${build}/rpm/INSTALL" />
+
+		<copy todir="${build}/rpm/SPECS" file="nagios-blue-plugins.spec" />
+		<copy todir="${build}/rpm/INSTALL/usr/lib/nagios/plugins/">
+			<fileset dir="${dist-plugins}" />
+		</copy>
+
+		<rpm specfile="nagios-blue-plugins.spec" topDir="${build}/rpm" command="--bb --buildroot=${build}/rpm/INSTALL" cleanbuilddir="true" removesource="true" removespec="true"/>
+		<copy todir="${dist}" file="${build}/rpm/RPMS/noarch/nagios-blue-plugins-${major.minor}-${release}.noarch.rpm" />
+
+	</target>
+
+	<!-- ************ JAVADOCS ************ -->
+	<target name="javadoc">
+
+		<javadoc destdir="${dist-javadocs}"
+			access="public" author="true" doctitle="Blue a Java Port of Nagios" 
+			nodeprecated="false" nodeprecatedlist="false" 
+			noindex="false" nonavbar="false" notree="false" source="1.5" 
+			splitindex="true" use="true" version="true">
+
+			<packageset dir="${server}/src" />
+			<packageset dir="${plugins}/src" />
+			<packageset dir="${webapps}/config-tool/src" />
+			<packageset dir="${webapps}/console/src" />
+
+			<classpath>
+				<fileset dir="java" >
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+
+		</javadoc>
+	</target>
+
+	<!-- ************  CLEAN ************ -->
+	<target name="clean" description="clean up">
+		<!-- Delete the ${build} and ${dist} directory trees -->
+		<delete dir="${build}" />
+		<delete dir="${dist}" />
+	</target>
+
+	<target name="deploy" description=" just untar distribution " depends="dist">
+		<untar src="${dist}/blue-${version}.tar.gz" dest="${dist}" compression="gzip" overwrite="true" />
+	</target>
+
+	<!-- Start the server and console -->
+	<target name="start" description=" start server with console" >
+		<java dir="${dist}/blue" fork="true" jar="${dist}/blue/blue-server.jar" args="--console etc/blue.cfg" />
+	</target>
+
+	<target name="start-web" description="start the web apps" >
+		<java dir="${dist-blue*salesforce}" fork="true" jar="${dist-blue*salesforce}/blue-server.jar">
+			<arg value="-c"/>
+		</java>
+	</target>
+
+</project>
